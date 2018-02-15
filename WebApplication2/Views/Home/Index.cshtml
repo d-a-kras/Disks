@@ -6,31 +6,17 @@
 <div class="jumbotron" style="background:url(../../Content/background.png)">
     <center><h2><font face="Arial">Проверка дисков в розыске</font></h2> </center>
     <center>
-        @using (Html.BeginForm("CheckCode", "Home", FormMethod.Post))
+
+        @using (Ajax.BeginForm("CheckDisk", new AjaxOptions { UpdateTargetId = "results" }))
         {
-            <p class="lead"><input placeholder="Введите код с диска" type="text"></p>
+            <p class="lead"><input placeholder="Введите код с диска" type="text" name="code"></p>
             <p><button class="btn btn-primary btn-lg">Проверить</button></p>
         }
     </center>
 </div>
 
-@if (@Model != null)
-{
-    if (Model.Id != 0)
-    {
-        if (Model.LOT)
-        {
-            <h3>Диски были украдены </h3>
-            <p>Необходимо обратиться в МВД для поимки воров.</p>
-        }
-        else
-        {
-            <h3>Диски не были украдены </h3>
+<div id="results"></div>
 
-        }
-    }
-    else
-    { <h3> Информация по данным дискам отсутствует </h3> }
-}
-else
-{}
+
+@Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")

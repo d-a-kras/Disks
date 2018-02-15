@@ -32,23 +32,47 @@ namespace WebApplication2.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult CheckDisk()
+        {
+            return PartialView();
+        }
 
 
         [HttpPost]
-        public ActionResult CheckCode(string str)
+        public ActionResult CheckDisk(string code)
         {
-            if ((str == "")&&(str.Length!=10))
+            if ((code == "")&&(code.Length!=10))
             {
                 return HttpNotFound();
             }
-            str = "QWERTYUIOP";
-            int co = db.ListDisks.Count();
-            Disks disks = db.ListDisks.First(m => m.Code == str);
-            if (disks!=null) { }
-            else { disks = new Disks(); }
+            // str = "QWERTYUIOP";
+            int check = 0;
+            //int co = db.ListDisks.Count();
+            Disks disks;
+            try
+            {
+                 disks = db.ListDisks.Where(m => m.Code == code).Single();
+                if (disks.LOT)
+                {
+                    check = 1;
+                }
+                else
+                {
+                    check = 2;
+                }
+            }
+            catch {
+                check = 3;
+            }
+         
+                
+                   
+                
+            
+           
 
-
-            return View("~/Views/Home/Index", disks);
+            ViewBag.Check = check;
+            return PartialView();
 
         }
 
