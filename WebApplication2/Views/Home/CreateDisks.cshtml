@@ -1,0 +1,23 @@
+﻿@model WebApplication2.Models.Disks
+
+@{
+    ViewBag.Title = "CreateDisks";
+}
+
+<h2>Создание уникального для кода для диска</h2>
+
+<h3>Выберите файл для загрузки</h3>
+<div id="pictures"></div>
+@using (Ajax.BeginForm("UploadPicture", "Home", new AjaxOptions { UpdateTargetId = "pictures" }))
+{
+    @Html.HiddenFor(m => m.Id)
+    
+    <input type="file" name="upload" /><br>
+    <input type="submit" value="Загрузить картинку" />
+}
+
+@using (Html.BeginForm())
+{
+
+    <input type="submit" value="Перейти на оплату" />
+}

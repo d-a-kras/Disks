@@ -3,8 +3,9 @@
 }
 @model WebApplication2.Models.Disks
 
-<div class="jumbotron" style="background:url(../../Content/background.png)">
+<div class="jumbotron" style="background:url(../../Content/background.png);padding-top:10px;background-position:center center;background-repeat: no-repeat;" >
     <center><h2><font face="Arial">Проверка дисков в розыске</font></h2> </center>
+    <br />
     <center>
 
         @using (Ajax.BeginForm("CheckDisk", new AjaxOptions { UpdateTargetId = "results" }))
@@ -17,6 +18,7 @@
 
 <div id="results"></div>
 
+      @{  Html.RenderPartial("ListDisks"); } 
 
 @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")

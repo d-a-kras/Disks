@@ -8,6 +8,7 @@ using System.Data.Entity;
 using WebApplication2.App_Start;
 using ImageResizer;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace WebApplication2.Controllers
 {
@@ -37,6 +38,20 @@ namespace WebApplication2.Controllers
             return PartialView();
         }
 
+        public ActionResult ListDisks()
+        {
+            var mylistDisks = db.ListDisks.Where(a => a.IdUser == User.Identity.Name).ToList();
+            if (mylistDisks.Count <= 0)
+            {
+                
+            }
+            return PartialView(mylistDisks);
+            
+        }
+
+        
+
+        
 
         [HttpPost]
         public ActionResult CheckDisk(string code)
@@ -103,22 +118,37 @@ namespace WebApplication2.Controllers
         //...........................
 
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase upload)
+        public ActionResult UploadPicture(HttpPostedFileBase upload, int Id)
         {
             if (upload != null)
             {
-                var path = Server.MapPath("~/Files/");
+                var path = Server.MapPath("~/Picture/{User.Identity.Name}");
+                if (!Directory.Exists(path))
+                {
+                    DirectoryInfo Dir = new DirectoryInfo(Request.MapPath(path));
+                    Dir.CreateSubdirectory(@User.Identity.Name);
+                }
+                path = Server.MapPath("~/Picture/{User.Identity.Name}/{Id}");
+                if (!Directory.Exists(path))
+                {
+                    DirectoryInfo Dir = new DirectoryInfo(Request.MapPath(path));
+                    Dir.CreateSubdirectory(Id.ToString());
+                }
+                int countpicture=System.IO.Directory.GetFiles(path).Length+1;
                 upload.InputStream.Seek(0, System.IO.SeekOrigin.Begin);
 
                 ImageBuilder.Current.Build(
                     new ImageJob(
                         upload.InputStream,
-                        path + upload.FileName,
+                        path + countpicture+"png",
                         new Instructions("maxwidth=600&maxheight=600"),
                         false,
                         false));
+                @ViewBag.CP = countpicture;
             }
-            return RedirectToAction("Index");
+            @ViewBag.Id = Id;
+           
+            return PartialView();
         }
 
         protected override void Dispose(bool disposing)
@@ -130,7 +160,7 @@ namespace WebApplication2.Controllers
         public async Task<ActionResult> SendMessage()
         {
             EmailService emailService = new EmailService();
-            await App_Start.EmailService.SendEmailAsync("somemail@mail.ru", "Тема письма", "Тест письма: тест!");
+            await App_Start.EmailService2.SendEmailAsync("somemail@mail.ru", "Тема письма", "Тест письма: тест!");
             return RedirectToAction("Index");
         }
 

@@ -7,7 +7,7 @@ using MailKit.Net.Smtp;
 using System.Threading.Tasks;
 namespace WebApplication2.App_Start
 {
-    public class EmailService
+    public class EmailService2
     {
         public static async Task SendEmailAsync(string email, string subject, string message)
         {

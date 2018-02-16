@@ -10,15 +10,13 @@ namespace WebApplication2.Models
     {
 
         public int Id { get; set; }
-        public int IdUser { get; set; }
+        public string IdUser { get; set; }
         public string Code { get; set; }
-        public string Photo { get; set; }
         public bool LOT { get; set; }
         public bool SendMVD { get; set; }
 
         public Disks() {
-            Id = 0;
-            IdUser = 0;
+           
 
         }
 

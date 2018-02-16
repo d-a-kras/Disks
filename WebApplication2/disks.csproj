@@ -222,7 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\EmailService.cs" />
+    <Compile Include="App_Start\EmailService2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\Kod.cs" />
@@ -309,9 +309,13 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Home\CheckDisk.cshtml" />
+    <Content Include="Views\Home\ListDisks.cshtml" />
+    <Content Include="Views\Home\CreateDisks.cshtml" />
+    <Content Include="Views\Home\UploadPicture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Picture\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
