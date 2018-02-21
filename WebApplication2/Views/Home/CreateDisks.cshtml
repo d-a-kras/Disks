@@ -1,23 +1,144 @@
-﻿@model WebApplication2.Models.Disks
+﻿
 
 @{
     ViewBag.Title = "CreateDisks";
 }
 
-<h2>Создание уникального для кода для диска</h2>
+<h2>Создание уникального кода для диска</h2>
+
+@Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+@Scripts.Render("~/scripts/upload.js")
 
 <h3>Выберите файл для загрузки</h3>
-<div id="pictures"></div>
-@using (Ajax.BeginForm("UploadPicture", "Home", new AjaxOptions { UpdateTargetId = "pictures" }))
-{
-    @Html.HiddenFor(m => m.Id)
-    
-    <input type="file" name="upload" /><br>
-    <input type="submit" value="Загрузить картинку" />
-}
+<div id="pictures">
+    <div id="picturesform">
 
-@using (Html.BeginForm())
-{
+    </div>
+    <div id="buttonUpload">
+        <input type="file" name="upload" id="uploadFile">
+    </div>
+</div>
 
-    <input type="submit" value="Перейти на оплату" />
-}
+<div id="roditelskoe_okno">
+    <div id="okno">
+        <div class="telo-okna">
+            <center>
+                <h3>Подождите</h3><br />
+
+                <img src="../../Content/preloader.gif">
+            </center>
+        </div>
+    </div>
+</div>
+
+<style>
+    #roditelskoe_okno {
+        opacity: 0.89;
+        background: #FFF;
+        width: 100%;
+        height: 100%;
+        display: none;
+        left: 0;
+        top: 0;
+        position: fixed;
+        z-index: 100;
+    }
+
+    #okno {
+        width: 200px;
+        background-clip: padding-box;
+        background-color: #FFF;
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        border-radius: 6px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        left: 50%;
+        top: 10%;
+        margin-left: -280px;
+        position: fixed;
+        outline: medium none;
+        z-index: 1050;
+    }
+
+    .telo-okna {
+        position: relative;
+        overflow-y: auto;
+        padding: 15px;
+        max-height: 400px;
+    }
+</style>
+
+
+<script type="text/javascript">
+
+    $('#uploadFile').on('change', function (e) {
+        console.log("change");
+        var time = performance.now();
+       
+       
+        vs('block');
+        e.preventDefault();
+        var files = document.getElementById('uploadFile').files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "UploadPicture",
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        var block = $('#picturesform'); // получаем нужный элемент
+                        if (result.length == 1) {
+
+                            block.empty();
+                            if (result[0].Check < 4) {
+                                block.append(result[0].HTMLtext);
+                            }
+
+                            if (result[0].Check == 4) {
+                                $('#buttonUpload').empty();
+                                $('#buttonUpload').append(result[0].HTMLtext);
+                            }
+
+                            time = performance.now() - time;
+                            console.log('Время выполнения = ', time);
+                            if (time < 1000) {
+                                setTimeout("vs('none')", 1000 - time);
+                                console.log(1000 - time);
+                            } else {
+                                vs('none');
+                            }
+
+                        } else {
+                            alert("Ошибка загрузки файла на сервер!");
+                        }
+
+
+                    },
+                    error: function (xhr, status, p3) {
+                        alert(xhr.responseText);
+                    }
+                });
+            } else {
+                alert("Браузер не поддерживает загрузку файлов HTML5!");
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        console.log("ready!");
+    });
+
+    function vs(pokazat) {
+        document.getElementById('roditelskoe_okno').style.display = pokazat;
+    }
+
+
+</script>
+

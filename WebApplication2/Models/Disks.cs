@@ -14,11 +14,16 @@ namespace WebApplication2.Models
         public string Code { get; set; }
         public bool LOT { get; set; }
         public bool SendMVD { get; set; }
+        public int IdOrder { get; set; }
+        public bool Paid { get; set; }
+        public string Folder { get; set; }
 
         public Disks() {
            
 
         }
+
+
 
     }
 

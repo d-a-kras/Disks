@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 
 namespace WebApplication2.App_Start
 {
@@ -125,6 +127,21 @@ namespace WebApplication2.App_Start
             dictionary.Add(58, '<');
             dictionary.Add(59, '>');
            
+        }
+    }
+
+    [DataContract]
+    public class ForJson
+    {
+        
+        public string HTMLtext{ get; set; }
+        
+        public int Check { get; set; }
+
+        public ForJson(string h, int c)
+        {
+            HTMLtext = h;
+            Check = c;
         }
     }
 }
