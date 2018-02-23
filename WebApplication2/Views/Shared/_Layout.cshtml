@@ -7,10 +7,20 @@
     <title>@ViewBag.Title – приложение ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-   
+    <style type="text/css">
+    @@font-face {
+        font-family: "San Francisco";
+        font-weight: 400;
+        src: url(../../fonts/11585.ttf);
+    }
+
+    .Text {
+        font-family: "San Francisco";
+    }
+    </style>
 
 </head>
-<body>
+<body  style="background-color:rgb(104,111,180)">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -23,7 +33,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                   
+                    <li>@Html.ActionLink("Список авторизованных сервисов", "AutoServices", "Home")</li>
                     <li>@Html.ActionLink("О программе", "About", "Home")</li>
                     <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
                 </ul>
@@ -35,7 +45,13 @@
         @RenderBody()
         <hr />
         <footer>
-           Данный сайт разработан ООО Кабинет математики.
+            <center>
+                SkrinDisk – это сервис предотвращения краж автомобильных дисков и колес.
+                Генерируем уникальный код, делаем нестираемую гравировку на диски в авторизованных сервисах.
+                Проверяем по нашей базе - не ворованные ли б/у диски перед покупкой.
+
+                <p>Cайт разработан кампанией "Кабинет математики".</p>
+            </center>
         </footer>
     </div>
 

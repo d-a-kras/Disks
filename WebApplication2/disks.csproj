@@ -258,6 +258,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="fonts\11585.ttf" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -319,6 +320,7 @@
     <Content Include="Views\Home\Pay.cshtml" />
     <Content Include="Views\Home\Paid.cshtml" />
     <Content Include="Views\Home\Pay2.cshtml" />
+    <Content Include="Views\Home\AutoServices.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

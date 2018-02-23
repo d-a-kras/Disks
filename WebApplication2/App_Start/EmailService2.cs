@@ -9,6 +9,8 @@ namespace WebApplication2.App_Start
 {
     public class EmailService2
     {
+       
+
         public static async Task SendEmailAsync(string email, string subject, string message)
         {
             var emailMessage = new MimeMessage();

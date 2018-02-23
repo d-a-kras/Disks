@@ -3,14 +3,20 @@
 }
 @model WebApplication2.Models.Disks
 
-<div class="jumbotron" style="background:url(../../Content/background.png);padding-top:10px;background-position:center center;background-repeat: no-repeat;" >
-    <center><h2><font face="Arial">Проверка дисков в розыске</font></h2> </center>
+<style>
+
+</style>
+
+
+<div class="jumbotron" style="background:url(../../Content/background.png);padding-top:10px;background-position:center center;background-repeat: no-repeat;">
+    <center><p class="bg-primary" style="font-family:'Times New Roman', Times, serif"><h1>Проверка дисков в розыске</h1></p> </center>
     <br />
     <center>
 
         @using (Ajax.BeginForm("CheckDisk", new AjaxOptions { UpdateTargetId = "results" }))
         {
             <p class="lead"><input placeholder="Введите код с диска" type="text" name="code"></p>
+            <p class="lead"><input placeholder="Введите номер владельца" type="text" name="number"></p>
             <p><button class="btn btn-primary btn-lg">Проверить</button></p>
         }
     </center>
@@ -18,7 +24,7 @@
 
 <div id="results"></div>
 
-      @{  Html.RenderPartial("ListDisks"); } 
+@{ Html.RenderPartial("ListDisks"); }
 
 @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")

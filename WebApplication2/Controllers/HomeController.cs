@@ -92,7 +92,7 @@ namespace WebApplication2.Controllers
         
 
         [HttpPost]
-        public ActionResult CheckDisk(string code)
+        public async Task<ActionResult> CheckDisk(string code, string number)
         {
             if ((code == "")&&(code.Length!=10))
             {
@@ -108,6 +108,7 @@ namespace WebApplication2.Controllers
                 if (disks.LOT)
                 {
                     check = 1;
+                    await EmailService2.SendEmailAsync(disks.IdUser,"","");
                 }
                 else
                 {
@@ -141,6 +142,13 @@ namespace WebApplication2.Controllers
         }
 
         public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult AutoServices()
         {
             ViewBag.Message = "Your contact page.";
 

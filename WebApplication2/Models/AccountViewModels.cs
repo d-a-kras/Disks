@@ -70,6 +70,11 @@ namespace WebApplication2.Models
         public string Email { get; set; }
 
         [Required]
+        [EmailAddress]
+        [Display(Name = "Номер телефона")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
