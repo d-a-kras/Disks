@@ -8,15 +8,16 @@
 </style>
 
 
-<div class="jumbotron" style="background:url(../../Content/background.png);padding-top:10px;background-position:center center;background-repeat: no-repeat;">
-    <center><p class="bg-primary" style="font-family:'Times New Roman', Times, serif"><h1>Проверка дисков в розыске</h1></p> </center>
-    <br />
+<div class="jumbotron" style="background-color:#717DD7;padding-top:5px;padding-bottom:5px" >
+    <center><p class="bg-primary"><font size="10" color="black" face="Georgia, serif">Проверка дисков в розыске</font></p> </center>
+
     <center>
+        <img src="../../Content/background.png"><br />
 
         @using (Ajax.BeginForm("CheckDisk", new AjaxOptions { UpdateTargetId = "results" }))
         {
             <p class="lead"><input placeholder="Введите код с диска" type="text" name="code"></p>
-            <p class="lead"><input placeholder="Введите номер владельца" type="text" name="number"></p>
+            <p class="lead"><input placeholder="Введите номер телефона" type="text" name="number"></p>
             <p><button class="btn btn-primary btn-lg">Проверить</button></p>
         }
     </center>

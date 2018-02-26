@@ -3,43 +3,43 @@
 @if (Request.IsAuthenticated)
 {
 <center>
-    <p class="btn btn-info" role="button">
-        @Html.ActionLink("Добавить диск", "CreateDisks", "Home")
-        
-    </p>
+    
+         <a class="btn btn-primary btn-lg" href="home/CreateDisks">Добавить диск</a>
+    
+
     @if (@Model != null)
     {
-    <div id="searchresults">
+        <div id="searchresults">
 
-        <table class="table">
-            <thead class="thead-inverse">
-                <tr>
-
-                    <th></th>
-                    <th>Код диска</th>
-                    <th>Отметка о краже</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                @foreach (var item in Model)
-                {
+            <table class="table">
+                <thead class="thead-inverse">
                     <tr>
 
-                        <td><div style="height:50px;width:50px;background-image:url(../../Picture/@User.Identity.Name/p1+{@item.Id}+.png)"></div></td>
-                        <td>@item.Code</td>
-                        <td>@item.LOT</td>
+                        <th></th>
+                        <th>Код диска</th>
+                        <th>Отметка о краже</th>
                     </tr>
+                </thead>
+                <tbody>
 
-                }
-                
-               
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td><div style="height:50px;width:50px;background-image:url(../../Picture/@User.Identity.Name/p1+{@item.Id}+.png)"></div></td>
+                            <td>@item.Code</td>
+                            <td>@item.LOT</td>
+                        </tr>
+
+                    }
 
 
-            </tbody>
-        </table>
 
-    </div>
+
+                </tbody>
+            </table>
+
+        </div>
 
     }
 </center>

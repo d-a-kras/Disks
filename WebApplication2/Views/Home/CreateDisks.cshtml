@@ -1,4 +1,4 @@
-﻿
+﻿@model WebApplication2.Models.Order
 
 @{
     ViewBag.Title = "CreateDisks";
@@ -10,30 +10,55 @@
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
 @Scripts.Render("~/scripts/upload.js")
 
-<h3>Выберите файл для загрузки</h3>
-<div id="pictures">
+<div class="jumbotron" style="background-color:#5D4BD8">
+    <h3>Выберите файл для загрузки</h3>
+
     <div id="picturesform">
 
     </div>
 
     <div class="file-upload" id="buttonUpload">
         <label>
-            <input type="file" name="upload" id="uploadFile">
+            <input type="file" name="upload" id="uploadFile" accept="image/jpeg,image/png">
             <span>Выберите фото</span>
         </label>
     </div>
-</div>
 
-<div id="roditelskoe_okno">
-    <div id="okno">
-        <div class="telo-okna">
-            <center>
-                <h3>Подождите</h3><br />
-
-                <img src="../../Content/preloader.gif">
-            </center>
+    <div id="pay" style="display:none">
+        <h2>Оплата товара @Model.Id</h2>
+        <div>
+            <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                <input name="label" value="@Model.Id" type="hidden">
+                <input name="receiver" value="410011174743222" type="hidden">
+                <input name="quickpay-form" value="shop" type="hidden">
+                <input type="hidden" name="targets" value="Оплата заказа @Model.Id">
+                <label for="sum">Сумма: </label><br />
+                <input name="sum" value="@Model.Sum" maxlength="10" data-type="number" type="text"><br /><br />
+                <label for="sum">Способ оплаты: </label><br />
+                <input type="radio" name="paymentType" value="PC">Яндекс.Деньгами
+                <input type="radio" name="paymentType" value="AC">Банковской картой<br /><br />
+                <input type="submit" name="submit-button" value="Оплатить">
+                <input name="successURL" value="http://mystore.somee.com/Home/Paid" type="hidden">
+                <input name="quickpay-back-url" value="http://mystore.somee.com/" type="hidden">
+            </form>
         </div>
     </div>
+</div>
+
+
+
+<div id="roditelskoe_okno">
+    <center>
+        <div id="okno">
+            <div class="telo-okna">
+                <center>
+                    <h3>Подождите</h3><br />
+
+                    <img src="../../Content/preloader.gif">
+                </center>
+            </div>
+        </div>
+    </center>
 </div>
 
 <style>
@@ -58,7 +83,7 @@
         border: 1px solid rgba(0, 0, 0, 0.3);
         left: 50%;
         top: 10%;
-        margin-left: -280px;
+        /*margin-left: -280px;*/
         position: fixed;
         outline: medium none;
         z-index: 1050;
@@ -70,12 +95,13 @@
         padding: 15px;
         max-height: 400px;
     }
+
     .file-upload {
         position: relative; /* Даем возможность делать позиционирование, внутри данного элемента */
         overflow: hidden; /* Все что выходит за пределы - скрываем */
         width: 20%; /* Задаем ширину кнопки выбора файла */
-        /*hight: 20px; /* Задаем высоту кнопки выбора файла */
-        background: #6da047;
+        height: 40px; /* Задаем высоту кнопки выбора файла */
+        background: #2A17B1;
         border-radius: 3px;
         padding: 8px 4px;
         color: #fff;
@@ -83,7 +109,7 @@
     }
 
         .file-upload:hover {
-            background: #7aad55;
+            background: #0094ff;
         }
 
         .file-upload input[type="file"] {
@@ -132,16 +158,17 @@
                     data: data,
                     success: function (result) {
                         var block = $('#picturesform'); // получаем нужный элемент
+                      
                         if (result.length == 1) {
 
                             block.empty();
-                            if (result[0].Check < 4) {
-                                block.append(result[0].HTMLtext);
-                            }
+
+                            block.append(result[0].HTMLtext);
+
 
                             if (result[0].Check == 4) {
-                                $('#buttonUpload').style.display = 'none';
-                                block.append(result[0].HTMLtext);
+                                document.getElementById('buttonUpload').style.display = 'none';
+                                document.getElementById('pay').style.display = 'block';
                             }
 
                             time = performance.now() - time;
@@ -154,13 +181,15 @@
                             }
 
                         } else {
+                            vs('none');
                             alert("Ошибка загрузки файла на сервер!");
                         }
 
 
                     },
                     error: function (xhr, status, p3) {
-                        alert(xhr.responseText);
+                        vs('none');
+                        alert("Ошибка загрузки файла на сервер!");
                     }
                 });
             } else {

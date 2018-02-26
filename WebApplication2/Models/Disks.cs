@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 
 namespace WebApplication2.Models
 {
@@ -18,8 +19,23 @@ namespace WebApplication2.Models
         public bool Paid { get; set; }
         public string Folder { get; set; }
 
-        public Disks() {
-           
+        public Disks(string iu) {
+            this.IdUser = iu;
+            Code = "";
+            LOT = false;
+            SendMVD = false;
+            Paid = false;
+            Folder = "temp";
+
+        }
+        public Disks()
+        {
+            this.IdUser = "";
+            Code = "";
+            LOT = false;
+            SendMVD = false;
+            Paid = false;
+            Folder = "temp";
 
         }
 

@@ -70,7 +70,7 @@ namespace WebApplication2.Models
         public string Email { get; set; }
 
         [Required]
-        [EmailAddress]
+        [Phone]
         [Display(Name = "Номер телефона")]
         public string PhoneNumber { get; set; }
 

@@ -9,6 +9,7 @@ namespace WebApplication2.Models
     public class Order
     {
         public int Id { get; set; } // id заказа
+        public int IdDisks { get; set; } // id заказа
         public DateTime? Date { get; set; } // дата
         public decimal Sum { get; set; } // сумма заказа
         public string Sender { get; set; } // отправитель - кошелек в ЯД
@@ -17,11 +18,14 @@ namespace WebApplication2.Models
         public decimal? WithdrawAmount { get; set; } // сумма, которую заплатали без учета комиссии
         public string UserId { get; set; } // id пользователя в системе, который сделал заказ
 
-        public Order(int fid, decimal s,string ui) {
-            this.Id = fid;
+        public Order(int idd, decimal s,string ui) {
+            this.IdDisks = idd;
             this.Date = DateTime.Now;
             this.Sum = s;
             this.UserId = ui;
+        }
+        public Order() {
+
         }
     }
 
@@ -34,9 +38,5 @@ namespace WebApplication2.Models
         public DbSet<Order> Orders { get; set; }
     }
 
-    public class OrderModel
-    {
-        public int OrderId { get; set; }
-        public decimal Sum { get; set; }
-    }
+    
 }

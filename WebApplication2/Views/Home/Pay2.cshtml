@@ -5,17 +5,17 @@
 
 <h2>Pay2</h2>
 
-@model WebApplication2.Models.OrderModel
+@model WebApplication2.Models.Order
 
-<h2>Оплата товара @Model.OrderId</h2>
+<h2>Оплата товара @Model.</h2>
 <div>
     <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
-        <input name="label" value="@Model.OrderId" type="hidden">
+        <input name="label" value="@Model. Id" type="hidden">
         <input name="receiver" value="410011174743222" type="hidden">
         <input name="quickpay-form" value="shop" type="hidden">
-        <input type="hidden" name="targets" value="Оплата заказа @Model.OrderId">
+        <input type="hidden" name="targets" value="Оплата заказа @Model.Id">
         <label for="sum">Сумма: </label><br />
-        <input name="sum" value="@Model.Sum" maxlength="10" data-type="number" type="text"><br /><br />
+        <input name="sum" value="@Model" maxlength="10" data-type="number" type="text"><br /><br />
         <label for="sum">Способ оплаты: </label><br />
         <input type="radio" name="paymentType" value="PC">Яндекс.Деньгами
         <input type="radio" name="paymentType" value="AC">Банковской картой<br /><br />

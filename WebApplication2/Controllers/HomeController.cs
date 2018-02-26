@@ -59,10 +59,33 @@ namespace WebApplication2.Controllers
                 }
             }
 
+            var b = db.ListDisks.Where(t=>(t.Folder=="temp")&&(t.IdUser==User.Identity.Name)).ToList();
+            if (b.Count > 0)
+            {
+                foreach (Disks d in b) {
+                    db.ListDisks.Remove(d);
+                }
+                db.SaveChanges();
+            }
+            Disks disks = new Disks(User.Identity.Name);
+            db.ListDisks.Add(disks);
+            db.SaveChanges();
+            Order order=new Order();
+            try
+            {
+                disks = db.ListDisks.Single(t => (t.Folder == "temp")&&(t.IdUser==User.Identity.Name));
+                order = new Order(disks.Id, 1, disks.IdUser);
+                
+            }
+            catch{
+
+            }
             
-            return View();
+
+            return View(order);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult CreateDisks(Disks disk)
         {
@@ -160,12 +183,12 @@ namespace WebApplication2.Controllers
         public ActionResult Pay2()
         {
             ViewBag.Message = "Your contact page.";
-            Disks disks = new Disks();
+            Disks disks = new Disks(User.Identity.Name);
             Order order = new Order(disks.Id, 1, disks.IdUser);
 
-            OrderModel orderModel = new OrderModel { OrderId = order.Id, Sum = order.Sum };
            
-            return View(orderModel);
+           
+            return View(order);
         }
 
 
@@ -223,10 +246,10 @@ namespace WebApplication2.Controllers
                     {
                         htmltext += "<img  src='../../Picture/" + @User.Identity.Name + "/temp/" + i + ".png'  width='50' height='50' >";
                     }
-                    if (countpicture == 4)
+                   /* if (countpicture == 4)
                     {
                         htmltext += "<form method='post' action='Pay2'> <input type='submit' value='Перейти к оплате'></form>";
-                    }
+                    }*/
                     
                     
                   
@@ -283,17 +306,18 @@ namespace WebApplication2.Controllers
             return RedirectToAction("Index");
         }
 
-        
-        
-        public ActionResult Pay(Disks disks)
-        {
-            db.ListDisks.Add(disks);
-            db.SaveChanges();
 
-            Order order = new Order(disks.Id,1,disks.IdUser); 
-            
-                OrderModel orderModel = new OrderModel { OrderId = order.Id, Sum = order.Sum };
-                return PartialView(orderModel);
+       
+        public ActionResult Pay()
+        {
+            Disks disks = new Disks(User.Identity.Name);
+
+            Order order = new Order(disks.Id, 1, disks.IdUser);
+
+          
+
+           
+            return PartialView(order);
             
             
         }
@@ -331,6 +355,8 @@ namespace WebApplication2.Controllers
                 Disks disks = db.ListDisks.FirstOrDefault(o => o.IdOrder == order.Id);
                 disks.Code = Kod.GetKode();
                 disks.Paid = true;
+                db.Entry(disks).State = EntityState.Modified;
+                db.SaveChanges();
 
             }
         }

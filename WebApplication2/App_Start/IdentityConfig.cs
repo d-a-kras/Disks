@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using WebApplication2.Models;
+using WebApplication2.App_Start;
 
 namespace WebApplication2
 {
@@ -20,19 +21,19 @@ namespace WebApplication2
         public Task SendAsync(IdentityMessage message)
         {
             // настройка логина, пароля отправителя
-            var from = "somemail@yandex.ru";
-            var pass = "password12";
+            
+           
 
             // адрес и порт smtp-сервера, с которого мы и будем отправлять письмо
-            SmtpClient client = new SmtpClient("smtp.yandex.ru", 25);
+            SmtpClient client = new SmtpClient(Const.server, 25);
 
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
-            client.Credentials = new System.Net.NetworkCredential(from, pass);
+            client.Credentials = new System.Net.NetworkCredential(Const.from, Const.password);
             client.EnableSsl = true;
 
             // создаем письмо: message.Destination - адрес получателя
-            var mail = new MailMessage(from, message.Destination);
+            var mail = new MailMessage(Const.from, message.Destination);
             mail.Subject = message.Subject;
             mail.Body = message.Body;
             mail.IsBodyHtml = true;

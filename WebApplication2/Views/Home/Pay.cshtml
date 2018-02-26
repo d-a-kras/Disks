@@ -1,1 +1,19 @@
-﻿
+﻿@model WebApplication2.Models.Order
+
+<h2>Оплата товара</h2>
+<div>
+    <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+        <input name="label" value="@Model" type="hidden">
+        <input name="receiver" value="410011174743222" type="hidden">
+        <input name="quickpay-form" value="shop" type="hidden">
+        <input type="hidden" name="targets" value="Оплата заказа @Model">
+        <label for="sum">Сумма: </label><br />
+        <input name="sum" value="@Model" maxlength="10" data-type="number" type="text"><br /><br />
+        <label for="sum">Способ оплаты: </label><br />
+        <input type="radio" name="paymentType" value="PC">Яндекс.Деньгами
+        <input type="radio" name="paymentType" value="AC">Банковской картой<br /><br />
+        <input type="submit" name="submit-button" value="Оплатить">
+        <input name="successURL" value="http://mystore.somee.com/Home/Paid" type="hidden">
+        <input name="quickpay-back-url" value="http://mystore.somee.com/" type="hidden">
+    </form>
+</div>
