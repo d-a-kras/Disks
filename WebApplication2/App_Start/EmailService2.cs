@@ -23,12 +23,11 @@ namespace WebApplication2.App_Start
                 Text = message
             };
 
-            using (var client = new SmtpClient())
+            using (MailKit.Net.Smtp.SmtpClient client = new SmtpClient())
             {
                 await client.ConnectAsync(Const.server, 25, false);
-                await client.AuthenticateAsync(Const.login, Const.password);
+               // await client.AuthenticateAsync(Const.login, Const.password);
                 await client.SendAsync(emailMessage);
-
                 await client.DisconnectAsync(true);
             }
         }

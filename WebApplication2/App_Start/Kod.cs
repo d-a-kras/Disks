@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Runtime.Serialization.Json;
 using System.Runtime.Serialization;
+using System.Threading;
 
 namespace WebApplication2.App_Start
 {
@@ -25,6 +26,7 @@ namespace WebApplication2.App_Start
             int.TryParse(dt.Year.ToString().Substring(2,2), out year);
             string kod = getSimvol(dt.Second) + getSimvol(dt.Minute) + getSimvol(dt.Hour) + getSimvol(dt.Day) + getSimvol(dt.Month) + getSimvol(year) + "" + getSimvol(count1) + getSimvol(count2) + getSimvol(count3) + getSimvol(count4);
             reCount();
+            Thread.Sleep(1000);
             return kod;
         }
 

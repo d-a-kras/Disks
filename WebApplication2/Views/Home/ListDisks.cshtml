@@ -1,46 +1,73 @@
-﻿@using Microsoft.AspNet.Identity
+﻿
+@{
+    ViewBag.Title = "Мои диски";
+}
+<center>
+    <h2>Мои диски</h2>
+</center>
+@using Microsoft.AspNet.Identity
 @model IEnumerable<WebApplication2.Models.Disks>
+
+
 @if (Request.IsAuthenticated)
 {
-<center>
-    
-         <a class="btn btn-primary btn-lg" href="home/CreateDisks">Добавить диск</a>
-    
+    <style>
+        img {
+            width: 100px; /* ширина картинки */
+            height: auto; /* высота картинки */
+            margin: 10px;
+        }
+    </style>
+    <center>
 
-    @if (@Model != null)
-    {
-        <div id="searchresults">
+        <a class="btn btn-primary btn-lg" href="home/CreateDisks">Добавить диск</a>
 
-            <table class="table">
-                <thead class="thead-inverse">
-                    <tr>
 
-                        <th></th>
-                        <th>Код диска</th>
-                        <th>Отметка о краже</th>
-                    </tr>
-                </thead>
-                <tbody>
+        @if (@Model != null)
+        {
+            <div id="searchresults">
 
-                    @foreach (var item in Model)
-                    {
+                <table class="table">
+                    <thead class="thead-inverse">
                         <tr>
 
-                            <td><div style="height:50px;width:50px;background-image:url(../../Picture/@User.Identity.Name/p1+{@item.Id}+.png)"></div></td>
+                            <th></th>
+                            <th>Код диска</th>
+                            <th>Отметка о краже</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+
+                            <td><div style="height:100px;width:100px;background-image:url(@item.Folder+'/1.png'')"></div></td>
                             <td>@item.Code</td>
-                            <td>@item.LOT</td>
+
+                            @if (!item.LOT)
+    {
+                        <td> <img src="../../Content/security.png"></td>
+                        <td>@Html.ActionLink("Сообщить о краже", "TheftDisks", "Home", new { id = @item.Id }, null)</td>
+}
+else
+{
+                        <td> <img src="../../Content/Theft.png"></td>
+                        <td></td>
+
+}
                         </tr>
 
-                    }
+                        }
 
 
 
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
 
-        </div>
+            </div>
 
-    }
-</center>
+        }
+    </center>
 }

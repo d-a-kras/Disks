@@ -21,16 +21,16 @@ namespace WebApplication2
         public Task SendAsync(IdentityMessage message)
         {
             // настройка логина, пароля отправителя
+
             
-           
 
             // адрес и порт smtp-сервера, с которого мы и будем отправлять письмо
             SmtpClient client = new SmtpClient(Const.server, 25);
 
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-            client.Credentials = new System.Net.NetworkCredential(Const.from, Const.password);
-            client.EnableSsl = true;
+            //client.UseDefaultCredentials = false;
+            //client.Credentials = new System.Net.NetworkCredential(Const.from, Const.password);
+            client.EnableSsl = false;
 
             // создаем письмо: message.Destination - адрес получателя
             var mail = new MailMessage(Const.from, message.Destination);

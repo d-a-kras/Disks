@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Models;
+using WebApplication2.Filters;
 using System.Data.Entity;
 using WebApplication2.App_Start;
 using ImageResizer;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Net;
 using System.Runtime.Serialization.Json;
 
@@ -24,6 +26,8 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
+
+        [auth]
         public ActionResult CreateDisks()
         {
             @ViewBag.CP = 0;
@@ -99,20 +103,33 @@ namespace WebApplication2.Controllers
             return PartialView();
         }
 
+        [auth]
         public ActionResult ListDisks()
         {
             var mylistDisks = db.ListDisks.Where(a => a.IdUser == User.Identity.Name).ToList();
             if (mylistDisks.Count <= 0)
             {
-                
+                return HttpNotFound();
             }
-            return PartialView(mylistDisks);
+            return View(mylistDisks);
             
         }
 
-        
+        [auth]
+        public async Task<ActionResult> TheftDisks( int id )
+        {
+            var disks = db.ListDisks.Where(m => m.Id == id).Single();
+            if (disks!=null) {
+                disks.LOT = true;
+                await EmailService2.SendEmailAsync(disks.IdUser, "Кража дисков", "Вы сообщили о краже дисков с уникальным кодом:" + disks.Code.ToString());
+                disks.SendMVD = true;
+                db.Entry(disks).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return RedirectToAction("ListDisks");
+        }
 
-        
+
 
         [HttpPost]
         public async Task<ActionResult> CheckDisk(string code, string number)
@@ -244,7 +261,7 @@ namespace WebApplication2.Controllers
 
                     for (int i = 1; i <= countpicture; i++)
                     {
-                        htmltext += "<img  src='../../Picture/" + @User.Identity.Name + "/temp/" + i + ".png'  width='50' height='50' >";
+                        htmltext += "<img  src='../../Picture/" + @User.Identity.Name + "/temp/" + i + ".png'  style='margin: 10px' width='100' height='100' >";
                     }
                    /* if (countpicture == 4)
                     {
@@ -332,7 +349,9 @@ namespace WebApplication2.Controllers
         public void Paid(string notification_type, string operation_id, int label, string datetime,
         decimal amount, decimal withdraw_amount, string sender, string sha1_hash, string currency, bool codepro)
         {
-            string key = "xxxxxxxxxxxxxxxx"; // секретный код
+            
+            bool vkod = false;
+            string key = "Ij4ELfvLuhA32IhYXPORmxiD"; // секретный код
                                              // проверяем хэш
             string paramString = String.Format("{0}&{1}&{2}&{3}&{4}&{5}&{6}&{7}&{8}",
                 notification_type, operation_id, amount, currency, datetime, sender,
@@ -353,11 +372,62 @@ namespace WebApplication2.Controllers
                 dbo.SaveChanges();
 
                 Disks disks = db.ListDisks.FirstOrDefault(o => o.IdOrder == order.Id);
-                disks.Code = Kod.GetKode();
+                for(int i=0;i<60;i++){
+                    if (!Kod.close) {
+                        Kod.close = true;
+                        disks.Code = Kod.GetKode();
+                        Kod.close = false;
+                        vkod = true;
+                        break;
+                    }
+                    Thread.Sleep(1000);
+                }
+
+                if (!vkod) {
+                    disks.Code = Kod.GetKode();
+                    Kod.close = false;
+                    vkod = true;
+                }
+
+               
+
+                string currentFolderName = Server.MapPath("~/Picture/" + User.Identity.Name);
+                DirectoryInfo drInfo = new DirectoryInfo(currentFolderName);
+                DirectoryInfo nf;
+                if (drInfo.Exists)
+                {
+                    List<DirectoryInfo> di = drInfo.GetDirectories().ToList();
+                    nf=drInfo.CreateSubdirectory(di.Count.ToString());
+
+                }
+                else {
+                   var path = "~/Picture/" ;
+                    DirectoryInfo Dir = new DirectoryInfo(Request.MapPath(path));
+                    Dir.CreateSubdirectory(User.Identity.Name);
+                    path= "~/Picture/" + User.Identity.Name;
+                    Dir = new DirectoryInfo(Request.MapPath(path));
+                    nf=Dir.CreateSubdirectory("1");
+                    //log
+                }
+
+                try
+                {
+                    string[] files = Directory.GetFiles(Server.MapPath("~/Picture/" + User.Identity.Name+"/temp/"));
+                    foreach (string srcFilePath in files)
+                    {
+                        System.IO.File.Move(srcFilePath, nf.ToString());
+                    }
+                }
+                catch (Exception e)
+                {
+                    //log
+                    Console.WriteLine("Ошибка перемещения файла(ов): " + e.Message);
+                }
+
+                disks.Folder = nf.ToString();
                 disks.Paid = true;
                 db.Entry(disks).State = EntityState.Modified;
                 db.SaveChanges();
-
             }
         }
         public string GetHash(string val)

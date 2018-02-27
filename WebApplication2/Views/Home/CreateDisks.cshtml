@@ -11,38 +11,41 @@
 @Scripts.Render("~/scripts/upload.js")
 
 <div class="jumbotron" style="background-color:#5D4BD8">
-    <h3>Выберите файл для загрузки</h3>
+    <center>
+        <p class="bg-primary"><font size="10" color="black" face="Georgia, serif">Выберите файл для загрузки</font></p> 
+        
 
-    <div id="picturesform">
+        <div id="picturesform">
 
-    </div>
-
-    <div class="file-upload" id="buttonUpload">
-        <label>
-            <input type="file" name="upload" id="uploadFile" accept="image/jpeg,image/png">
-            <span>Выберите фото</span>
-        </label>
-    </div>
-
-    <div id="pay" style="display:none">
-        <h2>Оплата товара @Model.Id</h2>
-        <div>
-            <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
-                <input name="label" value="@Model.Id" type="hidden">
-                <input name="receiver" value="410011174743222" type="hidden">
-                <input name="quickpay-form" value="shop" type="hidden">
-                <input type="hidden" name="targets" value="Оплата заказа @Model.Id">
-                <label for="sum">Сумма: </label><br />
-                <input name="sum" value="@Model.Sum" maxlength="10" data-type="number" type="text"><br /><br />
-                <label for="sum">Способ оплаты: </label><br />
-                <input type="radio" name="paymentType" value="PC">Яндекс.Деньгами
-                <input type="radio" name="paymentType" value="AC">Банковской картой<br /><br />
-                <input type="submit" name="submit-button" value="Оплатить">
-                <input name="successURL" value="http://mystore.somee.com/Home/Paid" type="hidden">
-                <input name="quickpay-back-url" value="http://mystore.somee.com/" type="hidden">
-            </form>
         </div>
-    </div>
+
+        <div class="file-upload btn btn-primary btn-lg" id="buttonUpload">
+            <label>
+                <input type="file" name="upload" id="uploadFile" accept="image/jpeg,image/png">
+                <span>Выберите фото</span>
+            </label>
+        </div>
+
+        <div id="pay" style="display:none">
+
+            <div>
+                <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                    <input name="label" value="@Model.Id" type="hidden">
+                    <input name="receiver" value="410016233084380" type="hidden">
+                    <input name="quickpay-form" value="shop" type="hidden">
+                    <input type="hidden" name="targets" value="Создание уникального кода для дисков">
+
+                    <input name="sum" value="@Model.Sum" maxlength="10" data-type="number" type="hidden">
+                    <label for="sum">Способ оплаты: </label><br />
+                    <input type="radio" name="paymentType" value="PC">Яндекс.Деньгами
+                    <input type="radio" name="paymentType" value="AC">Банковской картой<br /><br />
+                    <input type="submit" name="submit-button" class="btn btn-primary btn-lg" value="Оплатить">
+                    <input name="successURL" value="http://www.skrindisk.com/Home/Paid" type="hidden">
+                    <input name="quickpay-back-url" value="http://www.skrindisk.com/" type="hidden">
+                </form>
+            </div>
+        </div>
+    </center>
 </div>
 
 
@@ -62,6 +65,19 @@
 </div>
 
 <style>
+    img {
+        width: 100px; /* ширина картинки */
+        height: auto; /* высота картинки */
+        margin:10px;
+    }
+
+    .btn, .bg-primary, .btn-lg {
+        background-color: #6252A2;
+    }
+
+    .jumbotron {
+        background-color: #9384D1;
+    }
     #roditelskoe_okno {
         opacity: 0.89;
         background: #FFF;
@@ -81,7 +97,7 @@
         box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
         border-radius: 6px;
         border: 1px solid rgba(0, 0, 0, 0.3);
-        left: 50%;
+        left: 40%;
         top: 10%;
         /*margin-left: -280px;*/
         position: fixed;
@@ -99,7 +115,7 @@
     .file-upload {
         position: relative; /* Даем возможность делать позиционирование, внутри данного элемента */
         overflow: hidden; /* Все что выходит за пределы - скрываем */
-        width: 20%; /* Задаем ширину кнопки выбора файла */
+       /* width: 20%;  Задаем ширину кнопки выбора файла */
         height: 40px; /* Задаем высоту кнопки выбора файла */
         background: #2A17B1;
         border-radius: 3px;
