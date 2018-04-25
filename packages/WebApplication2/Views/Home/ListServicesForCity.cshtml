@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebApplication2.Models.AutoService>
+@if (Model.Count()>0) {
+    foreach (var item in Model)
+    {
+    <div style="border:1px solid black;min-height:100px;height:auto; padding:10px; margin-top:10px;overflow: auto;">
+        <div style="float:left; width:30%; padding-top:20px; padding-left:20px;">
+            @if (@item.Picture != null)
+            {
+                @Html.Raw("<img style='width:80%; height:auto;' src=\"data:image/jpeg;base64,"
+                                                                              + Convert.ToBase64String(@item.Picture) + "\" />")
+                <br />
+            }
+        </div>
+        <div style="float:right;width:70%;height:auto;">
+            <p>@item.Name</p>
+            <hr />
+            @if(@item.Phone!=null){
+            <p>@item.Phone</p>
+            <hr />
+            }
+            @if(@item.Site!=null){
+            <p>@item.Site</p>
+            <hr />
+            }
+            @if((@item.VK!=null)||(@item.FaceBook!=null)){
+            <p>@item.VK, @item.FaceBook</p>
+            <hr />}
+            @if(@item.Grapf!=null){
+            <p>@item.Grapf</p>
+            <hr />}
+            @if(@item.Description!=null){
+            <p>@item.Description</p>
+            }
+        </div>
+    </div>
+    <br />
+    }
+}
+else{ 
+<h2>Сервисов в данном городе не найдено!</h2><br />
+}

@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Список авторизованных сервисов";
+}
+@model IEnumerable<WebApplication2.Models.AutoService>
+<head>
+    <link rel="stylesheet" href="../../Content/tab.css" type="text/css" media="all" />
+</head>
+<center>
+    <a href="CreateAutoService" class="t592__btn t-btn t-btn_sm" style="color:#ffffff;background-color:#13ce66;border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px;"><table style="width:100%; height:100%;"><tr><td>Добавить автосервис</td></tr></table></a><br />
+    <br />
+
+    @using (Ajax.BeginForm("ListServicesForCity", "Home", new AjaxOptions
+    {
+        UpdateTargetId = "listcity"
+    }))
+
+    {
+        <div class="t-form__inputsbox">
+            <div class="t-input-group t-input-group_ph" data-input-lid="1495646545048">
+                <div class="t-input-block">
+                    <input id="city" type="text" name="city" class="t-input js-tilda-rule" value="" placeholder="Введите нужный город" data-tilda-rule="phone" style="border:1px inset black; border-box;max-width:700px;width:100%;color:#000000; background-color:#ffffff; border-radius: 7px; -moz-border-radius: 7px; -webkit-border-radius: 7px;">
+
+                </div>
+            </div>
+            <br />
+            <div class="t-form__submit"> <button type="submit" onclick="return validateCity();" class="t-submit" style="color:#ffffff;background-color:#13ce66;border-radius:7px; -moz-border-radius:7px; -webkit-border-radius:7px;">Поиск</button> </div>
+        </div>
+    }
+
+    <br />
+
+    <div id="listcity" style="width:60%">
+
+    </div>
+
+
+
+</center>
+
+<script>
+    function validate_form() {
+        var m = document.getElementById('city').value;
+        if (m != "") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+@Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
