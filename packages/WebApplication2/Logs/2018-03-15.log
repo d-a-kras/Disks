@@ -1,0 +1,110 @@
+2018-03-15 00:17:51.9609 | WebApplication2.Controllers.HomeController.CheckDisk | TRACE | check 
+
+2018-03-15 00:18:09.6597 | WebApplication2.Controllers.HomeController.CheckDisk | TRACE | check 
+
+2018-03-15 02:10:21.8067 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:10:24.3977 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 02:10:26.6422 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:10:26.8063 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 02:10:43.7447 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:10:43.9766 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 02:10:46.5586 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:10:47.0369 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 02:10:56.5943 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:10:56.6714 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 02:10:58.1924 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:10:58.4656 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 02:11:39.7536 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:11:39.8347 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 02:11:42.4695 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:11:42.8447 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 02:20:21.4429 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:20:21.6811 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 02:20:35.6004 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:20:35.7655 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 02:24:06.4552 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:24:06.8155 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 02:24:10.4679 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:24:10.6150 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 02:27:30.7793 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:27:30.9714 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 02:27:42.0438 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 02:27:42.2149 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 23:04:47.9082 | WebApplication2.Controllers.HomeController.Doc | TRACE | 6QTQBQHQRL 
+
+2018-03-15 23:17:59.7365 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 23:18:01.2626 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 23:18:04.5651 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 23:18:05.5942 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 23:26:04.9254 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 23:26:05.2546 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 23:26:28.9742 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 23:26:29.9689 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 23:29:18.9240 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 23:29:19.2102 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 23:29:39.3217 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 23:29:39.9591 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 23:43:49.0122 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 23:43:53.8795 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 23:43:57.6925 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 23:43:58.0132 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 23:47:48.4344 | WebApplication2.Controllers.HomeController.SendMarka | TRACE | MarkaСсылка на объект не указывает на экземпляр объекта. 
+
+2018-03-15 23:48:51.1607 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 23:48:51.8442 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 23:48:56.4336 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 23:48:56.8243 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
+2018-03-15 23:52:33.0198 | WebApplication2.Controllers.HomeController.SendMarka | TRACE | MarkaСсылка на объект не указывает на экземпляр объекта. 
+
+2018-03-15 23:52:54.0173 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+
+2018-03-15 23:55:02.2612 | WebApplication2.Controllers.HomeController.CreateDisks | TRACE | create order 
+
