@@ -1,0 +1,87 @@
+﻿
+
+
+@model WebApplication2.Models.AutoService
+
+@{
+    ViewBag.Title = "Создание автосервиса";
+}
+
+<br />
+<br />
+<div class="jumbotron" style="border-radius:10px; background-color:white;border:1px inset black; margin-left:10px;margin-right:10px; ">
+    <center>
+
+        @using (Html.BeginForm("CreateAutoService", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true)
+        <fieldset>
+            @Html.HiddenFor(m => m.Id)
+            <p>
+                @Html.LabelFor(m => m.Name, "Название автосервиса")
+                <br />
+                @Html.EditorFor(m => m.Name)
+            </p>
+            <p>
+                @Html.LabelFor(m => m.City, "Город")
+                <br />
+                @Html.EditorFor(m => m.City)
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Site, "Сайт")
+                <br />
+                @Html.EditorFor(m => m.Site)
+
+            </p>
+            <p>
+                @Html.LabelFor(m => m.VK, "ВКонтакте")
+                <br />
+                @Html.EditorFor(m => m.VK)
+
+            </p>
+            <p>
+                @Html.LabelFor(m => m.FaceBook, "FaceBook")
+                <br />
+                @Html.EditorFor(m => m.FaceBook)
+
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Description, "Описание")
+                <br />
+                @Html.EditorFor(m => m.Description)
+
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Site, "Адрес сайта")
+                <br />
+                @Html.EditorFor(m => m.Site)
+
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Grapf, "График работы")
+                <br />
+                @Html.EditorFor(m => m.Grapf)
+
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Phone, "Контактный номер")
+                <br />
+                @Html.EditorFor(m => m.Phone)
+
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Picture, "Логотип")
+                <br />
+                <input type="file" name="uploadImage" accept="image/jpeg,image/png">
+            </p>
+
+            <p><input type="submit" value="Отправить на публикацию" /></p>
+        </fieldset>
+        }
+
+        </center>
+        </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

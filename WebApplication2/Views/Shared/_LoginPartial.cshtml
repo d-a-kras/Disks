@@ -1,23 +1,62 @@
 ﻿@using Microsoft.AspNet.Identity
+@{
+    Layout = null;
+}
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
+        <div id="nav46750502marker"></div>
+        <div id="nav46750502" class="t456 t456__positionfixed " style="background-color: rgba(0,0,0,1); " data-bgcolor-hex="#000000" data-bgcolor-rgba="rgba(0,0,0,1)" data-navmarker="nav46750502marker" data-appearoffset="" data-bgopacity-two="" data-menushadow="" data-bgopacity="1" data-menu-items-align="right" data-menu="yes">
+            <div class="t456__maincontainer " style="">
+                <div class="t456__leftwrapper" style="">
+                    <div>
+                        <a href="/" style="color:#ffffff;">
+                            <div class="t456__logo t-title" field="title" style="color:#ffffff;"><div style="color:#f5ed05;" data-customstyle="yes"><strong>SkrinDisk</strong></div></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="t456__rightwrapper t456__menualign_right" style="">
+                    <ul class="t456__list">
+                        <li class="t456__list_item"><a class="t-menu__link-item" href="\Home\AutoServices2" style="color:#ffffff;font-weight:600;" data-menu-item-number="1">Авторизованные сервисы</a></li>
+                        <li class="t456__list_item"><a class="t-menu__link-item" href="\Home\ListDisks" style="color:#ffffff;font-weight:600;" data-menu-item-number="2">Мои диски</a></li>
 
-    <ul class="nav navbar-nav navbar-right">
-        <li style="color:gray;padding-top:15px">
-            @*Html.ActionLink("Здравствуйте, " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
-            Здравствуйте, @User.Identity.GetUserName()
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
-    </ul>
+                        <li class="t456__list_item"><a class="t-menu__link-item" href="#" style="color:#ffffff;font-weight:600;" data-menu-item-number="3">Здравствуйте, @User.Identity.GetUserName()</a></li>
+                        <li class="t456__list_item"><a class="t-menu__link-item" href="javascript:document.getElementById('logoutForm').submit()" style="color:#ffffff;font-weight:600;" data-menu-item-number="4">Выйти</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Выполнить вход", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <div id="nav46750502marker"></div>
+    <div id="nav46750502" class="t456 t456__positionfixed " style="background-color: rgba(0,0,0,1); " data-bgcolor-hex="#000000" data-bgcolor-rgba="rgba(0,0,0,1)" data-navmarker="nav46750502marker" data-appearoffset="" data-bgopacity-two="" data-menushadow="" data-bgopacity="1" data-menu-items-align="right" data-menu="yes">
+        <div class="t456__maincontainer " style="">
+            <div class="t456__leftwrapper" style="">
+                <div>
+                    <a href="/" style="color:#ffffff;">
+                        <div class="t456__logo t-title" field="title" style="color:#ffffff;"><div style="color:#f5ed05;" data-customstyle="yes"><strong>SkrinDisk</strong></div></div>
+                    </a>
+                </div>
+            </div>
+            <div class="t456__rightwrapper t456__menualign_right" style="">
+                <ul class="t456__list">
+                    <li class="t456__list_item"><a class="t-menu__link-item" href="\Home\AutoServices2" style="color:#ffffff;font-weight:600;" data-menu-item-number="1">Авторизованные сервисы</a></li>
+                    <li class="t456__list_item"><a class="t-menu__link-item" href="\Home\ListDisks" style="color:#ffffff;font-weight:600;" data-menu-item-number="2">Мои диски</a></li>
+
+                    @*<li class="t456__list_item"><a class="t-menu__link-item" style="color:#ffffff;font-weight:600;" data-menu-item-number="4">@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</a></li>*@
+                    <li class="t456__list_item"><a class="t-menu__link-item" href="\Account\Register" style="color:#ffffff;font-weight:600;" data-menu-item-number="3">Регистрация</a></li>
+                    <li class="t456__list_item"><a class="t-menu__link-item" href="\Account\Login" style="color:#ffffff;font-weight:600;" data-menu-item-number="4">Выполнить вход</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
 }

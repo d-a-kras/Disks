@@ -1,0 +1,338 @@
+﻿
+@model WebApplication2.Models.Order
+
+
+
+
+@Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+@Scripts.Render("~/scripts/upload.js")
+
+
+<div class="jumbotron">
+    <center>
+        <p><font size="6" color="black" face="Georgia, serif">Создание уникального кода для диска</font></p>
+
+
+        <div style=" margin-top:10px; width: 240px; " class="t-input-group t-input-group_in" data-input-lid="1495646533382">
+            <div class="t-input-block" id="pictureCar">
+
+                <div class="file-upload btn btn-primary btn-lg" id="buttonUploadCar">
+                    <label>
+                        <input type="file" name="uploadcar" id="uploadFileCar" accept="image/jpeg,image/png">
+                        <span>Фото автомобиля</span>
+                    </label>
+                </div>
+
+
+            </div>
+            <br />
+
+            <input style="border:1px inset black;box-sizing: border-box; width:100%;max-width:700px; color:#000000; background-color:#ffffff; border-radius: 7px; -moz-border-radius: 7px; -webkit-border-radius: 7px; padding-left:5px; " id="marka" type="text" name="code" class="t-input js-tilda-rule" value="" placeholder="Введите марку автомобиля">
+
+        </div>
+
+
+        <div id="picturesform">
+
+        </div>
+        <br />
+        <div class="file-upload btn btn-primary btn-lg" id="buttonUpload">
+            <label>
+                <input type="file" name="upload" id="uploadFile" accept="image/jpeg,image/png">
+                <span>Выберите фото  <img style="height:50%; width:auto;" src="../../Content/foto.png"></span>
+            </label>
+        </div>
+
+        <div id="pay" style="display:none">
+
+            <div>
+                <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml" onsubmit="return validate_form();">
+                    <input name="label" value="@Model.Id" type="hidden">
+                    <input name="receiver" value="410016233084380" type="hidden">
+                    <input name="quickpay-form" value="shop" type="hidden">
+                    <input type="hidden" name="targets" value="Создание уникального кода для дисков">
+
+                    <input name="sum" value="@Model.Sum" maxlength="10" data-type="number" type="hidden">
+                    <label for="sum">Способ оплаты: </label><br />
+                    <input type="radio" name="paymentType" value="PC">Яндекс.Деньгами<br />
+                    <input type="radio" name="paymentType" value="AC">Банковской картой<br /><br />
+                    <input type="submit" name="submit-button" class="btn btn-primary btn-lg" value="Оплатить">
+                    <input name="successURL" value="http://www.skrindisk.com/Home/Paid" type="hidden">
+
+                </form>
+            </div>
+        </div>
+    </center>
+</div>
+
+
+
+<div id="roditelskoe_okno">
+    <center>
+        <div id="okno">
+            <div class="telo-okna">
+                <center>
+                    <h3>Подождите</h3><br />
+
+                    <img src="../../Content/preloader.gif">
+                </center>
+            </div>
+        </div>
+    </center>
+</div>
+
+<style>
+    img {
+        width: 100px; /* ширина картинки */
+        height: auto; /* высота картинки */
+        margin: 10px;
+    }
+
+
+
+
+
+    #roditelskoe_okno {
+        opacity: 0.89;
+        background: #FFF;
+        width: 100%;
+        height: 100%;
+        display: none;
+        left: 0;
+        top: 0;
+        position: fixed;
+        z-index: 100;
+    }
+
+    #okno {
+        width: 50%;
+        background-clip: padding-box;
+        background-color: #FFF;
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        border-radius: 6px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        left: 25%;
+        top: 10%;
+        /*margin-left: -280px;*/
+        position: fixed;
+        outline: medium none;
+        z-index: 1050;
+    }
+
+    .telo-okna {
+        position: relative;
+        overflow-y: auto;
+        padding: 15px;
+        max-height: 400px;
+    }
+
+    .file-upload {
+        position: relative; /* Даем возможность делать позиционирование, внутри данного элемента */
+        width: 240px;
+        overflow: hidden;
+        height: 55px;
+        /* Задаем ширину кнопки выбора файла */
+        /* background: #2A17B1;*/
+        border-radius: 0px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 0px;
+        color: #000000;
+        border: 1px solid #000000;
+        background-color: white;
+        text-align: center;
+    }
+
+        .file-upload:hover {
+            background: #0094ff;
+        }
+
+        .file-upload input[type="file"] {
+            display: none; /* Обязательно скрываем настоящий Input File */
+        }
+
+        .file-upload label {
+            /* Растягиваем label на всю возможную площадь блока .file-upload */
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload span {
+            line-height: 36px; /* Делаем вертикальное выравнивание текста, который написан на кнопке */
+        }
+</style>
+
+
+<script type="text/javascript">
+
+    $('#uploadFile').on('change', function (e) {
+        console.log("change");
+        var time = performance.now();
+
+
+        vs('block');
+        e.preventDefault();
+        var files = document.getElementById('uploadFile').files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "UploadPicture",
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        var block = $('#picturesform'); // получаем нужный элемент
+
+                        if (result.length == 1) {
+
+                            block.empty();
+
+                            block.append(result[0].HTMLtext);
+
+
+
+                            if (result[0].Check == 4) {
+                                document.getElementById('buttonUpload').style.display = 'none';
+                                document.getElementById('pay').style.display = 'block';
+                            } else {
+                                var countOst = 4 - result[0].Check;
+                                block.append("<br/> <p>Осталось загрузить "+countOst+ " фото</p><br/>")
+                            }
+
+                            time = performance.now() - time;
+                            console.log('Время выполнения = ', time);
+                            if (time < 1000) {
+                                setTimeout("vs('none')", 1000 - time);
+                                console.log(1000 - time);
+                            } else {
+                                vs('none');
+                            }
+
+                        } else {
+                            vs('none');
+                            alert("Ошибка загрузки файла на сервер!");
+                        }
+
+
+                    },
+                    error: function (xhr, status, p3) {
+                        vs('none');
+                        // document.write(xhr.error + status)
+                        alert("Ошибка загрузки файла на сервер!");
+                    }
+                });
+            } else {
+                alert("Браузер не поддерживает загрузку файлов HTML5!");
+            }
+        }
+    });
+
+    $('#uploadFileCar').on('change', function (e) {
+        console.log("change");
+        var time = performance.now();
+
+
+        vs('block');
+        e.preventDefault();
+        var files = document.getElementById('uploadFileCar').files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "UploadPictureCar",
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        var block = $('#pictureCar'); // получаем нужный элемент
+
+                        if (result.length == 1) {
+
+                            block.empty();
+                            block.append(result[0].HTMLtext);
+
+
+
+                            time = performance.now() - time;
+                            console.log('Время выполнения = ', time);
+                            if (time < 1000) {
+                                setTimeout("vs('none')", 1000 - time);
+                                console.log(1000 - time);
+                            } else {
+                                vs('none');
+                            }
+
+                        } else {
+                            vs('none');
+                            alert("Ошибка загрузки файла на сервер!");
+                        }
+
+
+                    },
+                    error: function (xhr, status, p3) {
+                        vs('none');
+                        // document.write(xhr.error + status)
+                        alert("Ошибка загрузки файла на сервер!");
+                    }
+                });
+            } else {
+                alert("Браузер не поддерживает загрузку файлов HTML5!");
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        console.log("ready!");
+    });
+
+    function vs(pokazat) {
+        document.getElementById('roditelskoe_okno').style.display = pokazat;
+    }
+
+    function validate_form() {
+        var m = document.getElementById('marka').value;
+
+
+        if (m != "") {
+            $.ajax({
+                type: "POST",
+                url: "SendMarka",
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                data: "{'marka':'" + m + "', 'iddisks':'@Model.IdDisks'}",
+                success: function (result) {
+                    return true;
+                },
+                error: function (xhr, status, p3) {
+                    vs('none');
+                    // document.write(xhr.error + status)
+                    alert("Введите марку автомобиля");
+                    return false;
+                }
+            });
+        } else {
+
+            alert("Введите марку автомобиля");
+            return false;
+        }
+    }
+
+
+</script>

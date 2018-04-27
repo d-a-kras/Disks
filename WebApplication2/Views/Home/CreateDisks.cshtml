@@ -1,35 +1,82 @@
-﻿@model WebApplication2.Models.Order
+﻿
+@model WebApplication2.Models.Order
 
-@{
-    ViewBag.Title = "CreateDisks";
-}
 
-<h2>Создание уникального кода для диска</h2>
+
 
 @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
 @Scripts.Render("~/scripts/upload.js")
 
-<div class="jumbotron" style="background-color:#5D4BD8">
+<div id="rec51774643" class="r t-rec t-rec_pt_150 t-rec_pb_150" style="padding-top:150px;padding-bottom:150px; " data-record-type="563">
+    <!-- T563 -->
+    <div class="t563">
+        <div class="t-section__container t-container">
+            <div class="t-col t-col_12">
+                <div class="t-section__topwrapper t-align_center">
+                    <div class="t-section__title t-title t-title_xs" field="btitle">Генерация кода: шаг за шагом.</div>
+                </div>
+            </div>
+        </div>
+        <div class="t-container">
+            <div class="t563__col t-col t-col_4">
+                <div class="t563__numberwrapper">
+                    <div class="t563__number" style=" border-width: 2px; ">
+                        <div class="t563__digit t-name t-name_xs" style="">1</div>
+                    </div> <div class="t563__line" style="height: 2px; background-color: #e6e6e6;"></div>
+                    <div class="t563__line_mobile" style="width: 2px; background-color: #e6e6e6;"></div>
+                </div>
+                <div id="step1" class="t563__textwrapper t-align_left">
+                    <div class="t563__title t-name t-name_md" style="" field="title">
+                        <div style="color:#f5ed05;" data-customstyle="yes">Загрузите фотографии</div>
+                    </div>
+                    <div class="t563__text t-text t-text_xs" style="" field="descr">
+                        <div style="color:#f5ed05;" data-customstyle="yes">Автомобиля и всех 4х дисков</div>
+                    </div>
+                </div>
+            </div>
+            <div class="t563__col t-col t-col_4">
+                <div class="t563__numberwrapper">
+                    <div class="t563__number" style=" border-width: 2px; ">
+                        <div class="t563__digit t-name t-name_xs" style="">2</div>
+                    </div>
+                    <div class="t563__line" style="height: 2px; background-color: #e6e6e6;"></div>
+                    <div class="t563__line_mobile" style="width: 2px; background-color: #e6e6e6;"></div>
+                </div>
+                <div id="step2" class="t563__textwrapper t-align_left">
+                    <div class="t563__title t-name t-name_md" style="" field="title2">Произведите оплату</div>
+                    <div class="t563__text t-text t-text_xs" style="" field="descr2">Любым удобным Вам способом</div>
+                </div>
+            </div>
+            <div class="t563__col t-col t-col_4">
+                <div class="t563__numberwrapper">
+                    <div class="t563__number" style=" border-width: 2px; ">
+                        <div class="t563__digit t-name t-name_xs" style="">3</div>
+                    </div>
+                    <div class="t563__line" style="height: 2px; background-color: #e6e6e6;"></div>
+                    <div class="t563__line_mobile" style="width: 2px; background-color: #e6e6e6;"></div>
+                </div>
+                <div class="t563__textwrapper t-align_left">
+                    <div class="t563__title t-name t-name_md" style="" field="title3">Выберите автосервис</div>
+                    <div id="step2" class="t563__text t-text t-text_xs" style="" field="descr3">
+                        Любой удобный из
+                        <a style="" href="../Home/AutoServices2">списка Авторизованных</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron">
     <center>
-        <p class="bg-primary"><font size="10" color="black" face="Georgia, serif">Выберите файл для загрузки</font></p> 
-        
 
-        <div id="picturesform">
 
-        </div>
-
-        <div class="file-upload btn btn-primary btn-lg" id="buttonUpload">
-            <label>
-                <input type="file" name="upload" id="uploadFile" accept="image/jpeg,image/png">
-                <span>Выберите фото</span>
-            </label>
-        </div>
 
         <div id="pay" style="display:none">
 
             <div>
-                <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml" onsubmit="return validate_form();">
                     <input name="label" value="@Model.Id" type="hidden">
                     <input name="receiver" value="410016233084380" type="hidden">
                     <input name="quickpay-form" value="shop" type="hidden">
@@ -37,16 +84,106 @@
 
                     <input name="sum" value="@Model.Sum" maxlength="10" data-type="number" type="hidden">
                     <label for="sum">Способ оплаты: </label><br />
-                    <input type="radio" name="paymentType" value="PC">Яндекс.Деньгами
+                    <input type="radio" name="paymentType" value="PC">Яндекс.Деньгами<br />
                     <input type="radio" name="paymentType" value="AC">Банковской картой<br /><br />
                     <input type="submit" name="submit-button" class="btn btn-primary btn-lg" value="Оплатить">
                     <input name="successURL" value="http://www.skrindisk.com/Home/Paid" type="hidden">
-                    <input name="quickpay-back-url" value="http://www.skrindisk.com/" type="hidden">
+
                 </form>
             </div>
         </div>
     </center>
 </div>
+
+
+<div id="rec51775613" class="r t-rec t-rec_pt_45 t-rec_pb_150" style="padding-top:45px;padding-bottom:150px; " data-record-type="430">
+
+    <div style=" margin-top:10px; width: 240px; " class="t-input-group t-input-group_in" data-input-lid="1495646533382">
+
+        <!--
+        <div class="file-upload btn btn-primary btn-lg" id="buttonUploadCar">
+            <label>
+                <input type="file" name="uploadcar" id="uploadFileCar" accept="image/jpeg,image/png">
+                <span>Фото автомобиля</span>
+            </label>
+        </div>
+            -->
+
+
+
+
+
+
+    </div>
+
+
+
+    <br />
+    <!--
+    <div class="file-upload btn btn-primary btn-lg" id="buttonUpload">
+        <label>
+            <input type="file" name="upload" id="uploadFile" accept="image/jpeg,image/png">
+            <span>  <img style="height:50%; width:auto;" src="../../Content/foto.png"></span>
+        </label>
+    </div>-->
+    <!-- T430 -->
+    <center>
+        <div class="t-input-block" id="pictureCar">
+
+        </div>
+    </center>
+    <div class="t430" id="buttonUploadCar1">
+        <div class="t-container">
+            <div class="t-col t-col_8 t-prefix_2">
+                <div class="t430__wrapone">
+                    <div class="t430__wraptwo">
+
+
+
+                        <div class="t-btn file-upload" id="buttonUploadCar" style="color:#ffffff;background-color:#000000;">
+                            <div class="t430__btn-img-wrapper"><svg class="t430__btn-img t430__inlinesvg" style="" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 68" fill="#f5ed05"><path class="st0" d="M16 0h24v24h16L28 52 0 24h16zM0 60h56v8H0z" /></svg></div>
+                            <div class="t430__btn-text" style="">Загрузить фото автомобиля</div>
+                            <label>
+                                <input type="file" name="uploadcar" id="uploadFileCar" accept="image/jpeg,image/png">
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><br />
+    <center>
+        <input style="border:1px inset black;box-sizing: border-box; width:100%;max-width:700px; color:#000000; background-color:#ffffff; border-radius: 7px; -moz-border-radius: 7px; -webkit-border-radius: 7px; padding-left:5px; " id="marka" type="text" name="code" class="t-input js-tilda-rule" value="" placeholder="Введите марку автомобиля">
+    </center>
+    <br /><center>
+        <div id="picturesform">
+
+        </div>
+    </center>
+    <div class="t430">
+        <div class="t-container">
+            <div class="t-col t-col_8 t-prefix_2">
+                <div class="t430__wrapone">
+                    <div class="t430__wraptwo">
+
+                        <div class="t-btn file-upload" id="buttonUpload" style="color:#ffffff;background-color:#000000;">
+                            <div class="t430__btn-img-wrapper"><svg class="t430__btn-img t430__inlinesvg" style="" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 68" fill="#f5ed05"><path class="st0" d="M16 0h24v24h16L28 52 0 24h16zM0 60h56v8H0z" /></svg></div>
+                            <div class="t430__btn-text" style="">Загрузить фотографии</div>
+                            <label>
+                                <input type="file" name="upload" id="uploadFile" accept="image/jpeg,image/png">
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 
@@ -68,16 +205,13 @@
     img {
         width: 100px; /* ширина картинки */
         height: auto; /* высота картинки */
-        margin:10px;
+        margin: 10px;
     }
 
-    .btn, .bg-primary, .btn-lg {
-        background-color: #6252A2;
-    }
 
-    .jumbotron {
-        background-color: #9384D1;
-    }
+
+
+
     #roditelskoe_okno {
         opacity: 0.89;
         background: #FFF;
@@ -91,13 +225,13 @@
     }
 
     #okno {
-        width: 200px;
+        width: 50%;
         background-clip: padding-box;
         background-color: #FFF;
         box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
         border-radius: 6px;
         border: 1px solid rgba(0, 0, 0, 0.3);
-        left: 40%;
+        left: 25%;
         top: 10%;
         /*margin-left: -280px;*/
         position: fixed;
@@ -114,13 +248,18 @@
 
     .file-upload {
         position: relative; /* Даем возможность делать позиционирование, внутри данного элемента */
-        overflow: hidden; /* Все что выходит за пределы - скрываем */
-       /* width: 20%;  Задаем ширину кнопки выбора файла */
-        height: 40px; /* Задаем высоту кнопки выбора файла */
-        background: #2A17B1;
-        border-radius: 3px;
-        padding: 8px 4px;
-        color: #fff;
+        width: 240px;
+        overflow: hidden;
+        height: 55px;
+        /* Задаем ширину кнопки выбора файла */
+        /* background: #2A17B1;*/
+        border-radius: 0px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 0px;
+        color: #000000;
+        border: 1px solid #000000;
+        background-color: white;
         text-align: center;
     }
 
@@ -174,7 +313,7 @@
                     data: data,
                     success: function (result) {
                         var block = $('#picturesform'); // получаем нужный элемент
-                      
+
                         if (result.length == 1) {
 
                             block.empty();
@@ -182,9 +321,16 @@
                             block.append(result[0].HTMLtext);
 
 
+
                             if (result[0].Check == 4) {
                                 document.getElementById('buttonUpload').style.display = 'none';
+
                                 document.getElementById('pay').style.display = 'block';
+                                $("#step1").css("color", "#000000");
+                                $("#step2").css("color", "#f5ed05");
+                            } else {
+                                var countOst = 4 - result[0].Check;
+                                block.append("<br/> <p>Осталось загрузить "+countOst+ " фото</p><br/>")
                             }
 
                             time = performance.now() - time;
@@ -205,6 +351,66 @@
                     },
                     error: function (xhr, status, p3) {
                         vs('none');
+                        // document.write(xhr.error + status)
+                        alert("Ошибка загрузки файла на сервер!");
+                    }
+                });
+            } else {
+                alert("Браузер не поддерживает загрузку файлов HTML5!");
+            }
+        }
+    });
+
+    $('#uploadFileCar').on('change', function (e) {
+        console.log("change");
+        var time = performance.now();
+
+
+        vs('block');
+        e.preventDefault();
+        var files = document.getElementById('uploadFileCar').files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "UploadPictureCar",
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        var block = $('#pictureCar'); // получаем нужный элемент
+                        var block2 = $('#buttonUploadCar1');
+                        if (result.length == 1) {
+                            block2.empty();
+                            block.empty();
+                            block.append(result[0].HTMLtext);
+
+
+
+                            time = performance.now() - time;
+                            console.log('Время выполнения = ', time);
+                            if (time < 1000) {
+                                setTimeout("vs('none')", 1000 - time);
+                                console.log(1000 - time);
+                            } else {
+                                vs('none');
+                            }
+
+                        } else {
+                            vs('none');
+                            alert("Ошибка загрузки файла на сервер!");
+                        }
+
+
+                    },
+                    error: function (xhr, status, p3) {
+                        vs('none');
+                        // document.write(xhr.error + status)
                         alert("Ошибка загрузки файла на сервер!");
                     }
                 });
@@ -222,6 +428,33 @@
         document.getElementById('roditelskoe_okno').style.display = pokazat;
     }
 
+    function validate_form() {
+        var m = document.getElementById('marka').value;
+
+
+        if (m != "") {
+            $.ajax({
+                type: "POST",
+                url: "SendMarka",
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                data: "{'marka':'" + m + "', 'iddisks':'@Model.IdDisks'}",
+                success: function (result) {
+                    return true;
+                },
+                error: function (xhr, status, p3) {
+                    vs('none');
+                    // document.write(xhr.error + status)
+                    alert("Введите марку автомобиля");
+                    return false;
+                }
+            });
+        } else {
+
+            alert("Введите марку автомобиля");
+            return false;
+        }
+    }
+
 
 </script>
-

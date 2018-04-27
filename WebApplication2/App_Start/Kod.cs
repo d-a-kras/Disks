@@ -5,11 +5,13 @@ using System.Web;
 using System.Runtime.Serialization.Json;
 using System.Runtime.Serialization;
 using System.Threading;
+using NLog;
 
 namespace WebApplication2.App_Start
 {
     public class Kod
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         static Dictionary<int, char> dictionary;
         static public  bool close=false;
         static public int count1 = 0;
@@ -20,17 +22,25 @@ namespace WebApplication2.App_Start
        
 
         public static string GetKode() {
-            DateTime dt = new DateTime();
-            dt = DateTime.Now;
-            int year = 18;
-            int.TryParse(dt.Year.ToString().Substring(2,2), out year);
-            string kod = getSimvol(dt.Second) + getSimvol(dt.Minute) + getSimvol(dt.Hour) + getSimvol(dt.Day) + getSimvol(dt.Month) + getSimvol(year) + "" + getSimvol(count1) + getSimvol(count2) + getSimvol(count3) + getSimvol(count4);
-            reCount();
-            Thread.Sleep(1000);
-            return kod;
+            try
+            {
+                DateTime dt = new DateTime();
+                dt = DateTime.Now;
+                int year = 18;
+                int.TryParse(dt.Year.ToString().Substring(2, 2), out year);
+                string kod = getSimvol(dt.Second) + ""  + getSimvol(count1)+"" + getSimvol(dt.Minute) +"" + getSimvol(count2) +""+ getSimvol(dt.Hour) +"" + getSimvol(count3) +""+ getSimvol(dt.Day) +"" + getSimvol(count4) +""+ getSimvol(dt.Month) +""+ getSimvol(year);
+                reCount();
+                Thread.Sleep(1000);
+                return kod;
+            }
+            catch (Exception ex){
+                logger.Trace(ex.StackTrace);
+                return "";
+            }
         }
 
         public static void reCount() {
+            count1++;
             if (count1 == 59) {
                 count1 = 0;
                 count2++;

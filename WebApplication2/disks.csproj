@@ -80,6 +80,9 @@
     <Reference Include="MySql.Data.Entity.EF6, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.Entity.6.8.8\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.13\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.Configuration.Install" />
@@ -239,33 +242,72 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AutoService.cs" />
     <Compile Include="Models\Disks.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\VipCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
     <Content Include="Content\a1.png" />
     <Content Include="Content\a2.png" />
     <Content Include="Content\a3.png" />
+    <Content Include="Content\b2.png" />
     <Content Include="Content\background.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\foto.png" />
+    <Content Include="Content\galochka-zelenaya.png" />
+    <Content Include="Content\icon.png" />
+    <Content Include="css\ld.css" />
+    <Content Include="Content\theft.png" />
+    <Content Include="Content\metal.png" />
     <Content Include="Content\preloader.gif" />
     <Content Include="Content\security.png" />
-    <Content Include="Content\Theft.png" />
+    <Content Include="Content\t3.png" />
+    <Content Include="Content\tab.css" />
+    <Content Include="Content\theft2.png" />
+    <Content Include="css\tilda-animation-1.0.min.css" />
+    <Content Include="css\tilda-blocks-2.12.css" />
+    <Content Include="css\tilda-grid-3.0.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\tild3036-3131-4934-b633-356631303739__-__resize__20x__0_932dd_1262885f_ori.jpg" />
+    <Content Include="images\tild3036-3131-4934-b633-356631303739__0_932dd_1262885f_ori.jpg" />
+    <Content Include="images\tild3437-6463-4033-a436-383437663565__-__resize__20x__fonstolaru-117280.jpg" />
+    <Content Include="images\tild3437-6463-4033-a436-383437663565__fonstolaru-117280.jpg" />
+    <Content Include="images\tild3763-6461-4836-b261-353035633734__-__resize__20x__1.svg" />
+    <Content Include="images\tild3763-6461-4836-b261-353035633734__1.svg" />
+    <Content Include="images\tild6630-3033-4237-a564-646431313432__-__resize__20x__2.svg" />
+    <Content Include="images\tild6630-3033-4237-a564-646431313432__2.svg" />
+    <Content Include="js\hammer.min.js" />
+    <Content Include="js\jquery-1.10.2.min.js" />
+    <Content Include="js\lazyload-1.3.min.js" />
+    <Content Include="js\tilda-animation-1.0.min.js" />
+    <Content Include="js\tilda-blocks-2.7.js" />
+    <Content Include="js\tilda-forms-1.0.min.js" />
+    <Content Include="js\tilda-scripts-2.8.min.js" />
+    <Content Include="js\tilda-slds-1.4.min.js" />
+    <Content Include="js\tilda-zoom-2.0.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="fonts\11585.ttf" />
+    <Content Include="Logs\1.log" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -298,7 +340,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\IndexOld.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -322,13 +364,31 @@
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Home\CheckDisk.cshtml" />
     <Content Include="Views\Home\ListDisksPartial.cshtml" />
-    <Content Include="Views\Home\CreateDisks.cshtml" />
+    <Content Include="Views\Home\CreateDisks2.cshtml" />
     <Content Include="Views\Home\UploadPicture.cshtml" />
     <Content Include="Views\Home\Pay.cshtml" />
     <Content Include="Views\Home\Paid.cshtml" />
     <Content Include="Views\Home\Pay2.cshtml" />
     <Content Include="Views\Home\AutoServices.cshtml" />
     <Content Include="Views\Home\ListDisks.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\bar.cshtml" />
+    <Content Include="Views\Home\View.cshtml" />
+    <Content Include="Views\Home\EditAutoService.cshtml" />
+    <Content Include="Views\Home\CreateAutoService.cshtml" />
+    <Content Include="Views\Home\AdminPanelServices.cshtml" />
+    <Content Include="Views\Home\CreateDisks.cshtml" />
+    <Content Include="Views\Home\PanelDoc.cshtml" />
+    <Content Include="Views\Home\CreateListDisks.cshtml" />
+    <Content Include="Views\Home\EditDisks.cshtml" />
+    <Content Include="Views\Home\ErrorEditDisks.cshtml" />
+    <Content Include="Views\Home\CreateDisksV2.cshtml" />
+    <Content Include="Views\Home\PublishServices.cshtml" />
+    <Content Include="Views\Home\AutoServices2.cshtml" />
+    <Content Include="Views\Home\ListServicesForCity.cshtml">
+      <BrowseToURL>~/Home/ListAutoServicesForCity</BrowseToURL>
+    </Content>
+    <Content Include="Views\Home\CreateDisksV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

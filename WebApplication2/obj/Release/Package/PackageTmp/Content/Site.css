@@ -23,7 +23,21 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 300px;
 }
 
+footer {
+    background-color:#A2A2A2;
+}
 
+@media screen and (max-width: 980px) {
+    #rec46750502 .t456__leftcontainer {
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    #rec46750502 .t456__imglogo {
+        padding: 20px 0;
+    }
+}

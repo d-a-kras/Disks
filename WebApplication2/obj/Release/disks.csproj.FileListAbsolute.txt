@@ -204,7 +204,10 @@ C:\Users\kras\Documents\GitHub\Disks\WebApplication2\bin\ru\Microsoft.Owin.Secur
 C:\Users\kras\Documents\GitHub\Disks\WebApplication2\bin\ru\Microsoft.Owin.Security.Google.resources.dll
 C:\Users\kras\Documents\GitHub\Disks\WebApplication2\bin\ru\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Users\kras\Documents\GitHub\Disks\WebApplication2\bin\ru\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Users\kras\Documents\GitHub\Disks\WebApplication2\obj\Release\disks.csprojResolveAssemblyReference.cache
 C:\Users\kras\Documents\GitHub\Disks\WebApplication2\obj\Release\disks.csproj.CoreCompileInputs.cache
 C:\Users\kras\Documents\GitHub\Disks\WebApplication2\obj\Release\WebApplication2.dll
 C:\Users\kras\Documents\GitHub\Disks\WebApplication2\obj\Release\WebApplication2.pdb
+C:\Users\kras\Documents\GitHub\Disks\WebApplication2\bin\NLog.config
+C:\Users\kras\Documents\GitHub\Disks\WebApplication2\bin\NLog.dll
+C:\Users\kras\Documents\GitHub\Disks\WebApplication2\bin\NLog.xml
+C:\Users\kras\Documents\GitHub\Disks\WebApplication2\obj\Release\disks.csprojResolveAssemblyReference.cache

@@ -2,9 +2,7 @@
 @{
     ViewBag.Title = "Мои диски";
 }
-<center>
-    <h2>Мои диски</h2>
-</center>
+
 @using Microsoft.AspNet.Identity
 @model IEnumerable<WebApplication2.Models.Disks>
 
@@ -18,56 +16,210 @@
             margin: 10px;
         }
     </style>
-    <center>
-
-        <a class="btn btn-primary btn-lg" href="home/CreateDisks">Добавить диск</a>
-
-
-        @if (@Model != null)
-        {
-            <div id="searchresults">
-
-                <table class="table">
-                    <thead class="thead-inverse">
-                        <tr>
-
-                            <th></th>
-                            <th>Код диска</th>
-                            <th>Отметка о краже</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach (var item in Model)
-                        {
-                        <tr>
-
-                            <td><div style="height:100px;width:100px;background-image:url(@item.Folder+'/1.png'')"></div></td>
-                            <td>@item.Code</td>
-
-                            @if (!item.LOT)
-    {
-                        <td> <img src="../../Content/security.png"></td>
-                        <td>@Html.ActionLink("Сообщить о краже", "TheftDisks", "Home", new { id = @item.Id }, null)</td>
-}
-else
-{
-                        <td> <img src="../../Content/Theft.png"></td>
-                        <td></td>
-
-}
-                        </tr>
-
-                        }
 
 
 
 
-                    </tbody>
-                </table>
+    <div id="rec47322185" class="r t-rec t-rec_pt_120 t-rec_pb_90" style="padding-top:120px;padding-bottom:90px; " data-record-type="60">
+        <!-- T050 --><div class="t050">
+            <div class="t-container t-align_center">
 
+                <div class="t050__uptitle t-uptitle t-uptitle_sm" field="subtitle" style="text-transform:uppercase;">
+                    здесь хранятся фотографии ваших дисков
+                    <div class="t050__title t-title t-title_xxl" field="title" style="">Архив<br />фотографий дисков<br /></div> <div class="t050__descr t-descr t-descr_xxl" field="descr" style="">хранилище загруженных фотографий всех ваших дисков </div>
+                </div>
             </div>
+        </div>
+    </div>
 
+    if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+
+            if ((item.Optom == null) || ((bool)!item.Optom))
+            {
+                <div id="rec47322704" class="r t-rec t-rec_pt_135 t-rec_pb_30" style="padding-top:135px;padding-bottom:30px; " data-record-type="33">
+                    <!-- T017 --><div class="t017">
+                        <div class="t-container t-align_center">
+
+                            <div class="t017__uptitle t-uptitle t-uptitle_md" field="subtitle" style="">сессия от @item.Data.Date.ToShortDateString()</div>
+                            <div class="t017__title t-title t-title_xxs" field="title" style="">Диски для @item.Marka</div>
+                        </div>
+                    </div>
+                </div>
+                <center>
+                    <div id="rec47323936" class="r t-rec t-rec_pt_30 t-rec_pb_30" style="padding-top:30px;padding-bottom:30px; " data-record-type="56">
+                        <!-- T046 --><div class="t046">
+                            <div class="t-container">
+
+                                <div class="t046__text t-text t-text_xs" field="text">Уникальный код SkrinDisk'a: <b>@item.Code</b></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </center>
+
+                if (!item.LOT)
+                {
+                    <center>
+                        <div id="rec47323694" class="r t-rec t-rec_pt_90 t-rec_pb_90" style="padding-top:50px;padding-bottom:50px; " data-record-type="208">
+                            <!-- T142A -->
+                            <div class="t142A">
+                                <div class="t-container_100">
+                                    <div class="t142A__wrapone">
+                                        <div class="t142A__wraptwo">
+
+                                            <img style="height:100px;width:auto;" src="../../Content/galochka-zelenaya.png">
+
+
+                                            <a href="#" target="" class="t-btn t142A__marginleft20px" style="color:#000000;border:3px solid #000000;">
+                                                <table style="width:100%; height:100%;"><tr><td>@Html.ActionLink("Сообщить о краже", "TheftDisks", "Home", new { id = @item.Id }, null)</td></tr></table>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </center>
+                }
+                else
+                {
+                    <center>
+                        <div id="rec47323694" class="r t-rec t-rec_pt_90 t-rec_pb_90" style="padding-top:20px;padding-bottom:20px; " data-record-type="208">
+                            <!-- T142A -->
+                            <div class="t142A">
+                                <div class="t-container_100">
+                                    <div class="t142A__wrapone">
+                                        <div class="t142A__wraptwo">
+
+                                            <img style="height:100px;width:auto;" src="../../Content/theft.png">
+
+                                            <h3>Диски украдены</h3>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </center>
+                }
+
+                <center>
+                    <div id="rec51768386" class="r t-rec" style=" " data-animationappear="off" data-record-type="396">
+                        <!-- T396 -->
+                        <div class='t396'>
+                            <div class="t396__artboard" data-artboard-recid="51768386" data-artboard-height="956" data-artboard-height-res-960="785" data-artboard-height-res-640="490" data-artboard-height-res-480="376" data-artboard-height-res-320="730" data-artboard-height_vh="" data-artboard-valign="center">
+                                <div class="t396__carrier" data-artboard-recid="51768386"> </div>
+                                <div class="t396__filter" data-artboard-recid="51768386"> </div>
+                                <div class='t396__elem tn-elem tn-elem__517683861494860576199' data-elem-id='1494860576199' data-elem-type='shape' data-field-top-value="20" data-field-top-res-960-value="20" data-field-top-res-640-value="10" data-field-top-res-480-value="10" data-field-top-res-320-value="10" data-field-left-value="20" data-field-left-res-960-value="10" data-field-left-res-640-value="20" data-field-left-res-480-value="10" data-field-left-res-320-value="10" data-field-height-value="650" data-field-height-res-960-value="525" data-field-height-res-640-value="335" data-field-height-res-480-value="250" data-field-height-res-320-value="170" data-field-width-value="1160" data-field-width-res-960-value="940" data-field-width-res-640-value="600" data-field-width-res-480-value="460" data-field-width-res-320-value="300" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="" data-field-leftunits-value="" data-field-heightunits-value="" data-field-widthunits-value="">
+                                    <div class='tn-atom t-bgimg' data-original="../../Picture/@User.Identity.Name/@item.Folder/auto.png" style="background-image:url('../../Picture/@User.Identity.Name/@item.Folder/auto.png');"> </div>
+                                </div>
+                                <div class='t396__elem tn-elem tn-elem__517683861494860636660' data-elem-id='1494860636660' data-elem-type='shape' data-field-top-value="690" data-field-top-res-960-value="565" data-field-top-res-640-value="355" data-field-top-res-480-value="270" data-field-top-res-320-value="190" data-field-left-value="20" data-field-left-res-960-value="10" data-field-left-res-640-value="20" data-field-left-res-480-value="10" data-field-left-res-320-value="10" data-field-height-value="228" data-field-height-res-960-value="200" data-field-height-res-640-value="125" data-field-height-res-480-value="96" data-field-height-res-320-value="170" data-field-width-value="261" data-field-width-res-960-value="300" data-field-width-res-640-value="193" data-field-width-res-480-value="146" data-field-width-res-320-value="300" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="" data-field-leftunits-value="" data-field-heightunits-value="" data-field-widthunits-value="">
+                                    <div class='tn-atom t-bgimg' data-original="../../Picture/@User.Identity.Name/@item.Folder/d1.png" style="background-image:url('../../Picture/@User.Identity.Name/@item.Folder/d1.png');" data-zoomable="yes" data-img-zoom-url="../../Picture/@User.Identity.Name/@item.Folder/d1.png"> </div>
+                                </div>
+                                <div class='t396__elem tn-elem tn-elem__517683861524460183888' data-elem-id='1524460183888' data-elem-type='shape' data-field-top-value="690" data-field-top-res-960-value="565" data-field-top-res-640-value="355" data-field-top-res-480-value="270" data-field-top-res-320-value="190" data-field-left-value="321" data-field-left-res-960-value="10" data-field-left-res-640-value="20" data-field-left-res-480-value="10" data-field-left-res-320-value="10" data-field-height-value="228" data-field-height-res-960-value="200" data-field-height-res-640-value="125" data-field-height-res-480-value="96" data-field-height-res-320-value="170" data-field-width-value="261" data-field-width-res-960-value="300" data-field-width-res-640-value="193" data-field-width-res-480-value="146" data-field-width-res-320-value="300" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="" data-field-leftunits-value="" data-field-heightunits-value="" data-field-widthunits-value="">
+                                    <div class='tn-atom t-bgimg' data-original="../../Picture/@User.Identity.Name/@item.Folder/d2.png" style="background-image:url('../../Picture/@User.Identity.Name/@item.Folder/d2.png');" data-zoomable="yes" data-img-zoom-url="../../Picture/@User.Identity.Name/@item.Folder/d2.png"> </div>
+                                </div>
+                                <div class='t396__elem tn-elem tn-elem__517683861524460204984' data-elem-id='1524460204984' data-elem-type='shape' data-field-top-value="690" data-field-top-res-960-value="565" data-field-top-res-640-value="355" data-field-top-res-480-value="270" data-field-top-res-320-value="190" data-field-left-value="618" data-field-left-res-960-value="10" data-field-left-res-640-value="20" data-field-left-res-480-value="10" data-field-left-res-320-value="10" data-field-height-value="228" data-field-height-res-960-value="200" data-field-height-res-640-value="125" data-field-height-res-480-value="96" data-field-height-res-320-value="170" data-field-width-value="262" data-field-width-res-960-value="300" data-field-width-res-640-value="193" data-field-width-res-480-value="146" data-field-width-res-320-value="300" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="" data-field-leftunits-value="" data-field-heightunits-value="" data-field-widthunits-value="">
+                                    <div class='tn-atom t-bgimg' data-original="../../Picture/@User.Identity.Name/@item.Folder/d3.png" style="background-image:url('../../Picture/@User.Identity.Name/@item.Folder/d3.png');" data-zoomable="yes" data-img-zoom-url="../../Picture/@User.Identity.Name/@item.Folder/d3.png"> </div>
+                                </div>
+                                <div class='t396__elem tn-elem tn-elem__517683861524460208473' data-elem-id='1524460208473' data-elem-type='shape' data-field-top-value="690" data-field-top-res-960-value="565" data-field-top-res-640-value="355" data-field-top-res-480-value="270" data-field-top-res-320-value="190" data-field-left-value="919" data-field-left-res-960-value="10" data-field-left-res-640-value="20" data-field-left-res-480-value="10" data-field-left-res-320-value="10" data-field-height-value="228" data-field-height-res-960-value="200" data-field-height-res-640-value="125" data-field-height-res-480-value="96" data-field-height-res-320-value="170" data-field-width-value="261" data-field-width-res-960-value="300" data-field-width-res-640-value="193" data-field-width-res-480-value="146" data-field-width-res-320-value="300" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="" data-field-leftunits-value="" data-field-heightunits-value="" data-field-widthunits-value="">
+                                    <div class='tn-atom t-bgimg' data-original="../../Picture/@User.Identity.Name/@item.Folder/d4.png" style="background-image:url('../../Picture/@User.Identity.Name/@item.Folder/d4.png');" data-zoomable="yes" data-img-zoom-url="../../Picture/@User.Identity.Name/@item.Folder/d4.png">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            $(document).ready(function () {
+                                t396_init('51768386');
+                            });</script><!-- /T396 -->
+                    </div>
+
+                </center>
+
+
+
+
+            }
+            else
+            {
+                <center>
+                    <div id="rec47323936" class="r t-rec t-rec_pt_30 t-rec_pb_30" style="padding-top:30px;padding-bottom:30px; " data-record-type="56">
+                        <!-- T046 --><div class="t046">
+                            <div class="t-container">
+
+                                <div class="t046__text t-text t-text_xs" field="text">Уникальный код SkrinDisk'a: <b>@item.Code</b></div> <a href="../Home/EditDisks/@item.Id">Присвоить владельца</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </center>
+
+            }
         }
-    </center>
+
+    }
+    else
+    {
+
+    }
 }
+
+@*
+    <div class="jumbotron" style="padding-top:5px;padding-bottom:5px;border-radius:10px;">
+        <center>
+
+            <a class="btn btn-primary btn-lg" href="CreateDisks">Добавить диск</a>
+
+
+            @if (@Model != null)
+            {
+                <div id="searchresults">
+
+                    <table class="table">
+                        <thead class="thead-inverse">
+                            <tr>
+
+                                <th></th>
+                                <th>Код диска</th>
+                                <th>Отметка о краже</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td><div style="height:100px;width:100px;background-image:url(@item.Folder+'/1.png'')"></div></td>
+                                    <td>@item.Code</td>
+
+                                    @if (!item.LOT)
+                                    {
+                                        <td> <img src="../../Content/security.png"></td>
+                                        <td>@Html.ActionLink("Сообщить о краже", "TheftDisks", "Home", new { id = @item.Id }, null)</td>
+                                    }
+                                    else
+                                    {
+                                        <td> </td>
+                                        <td></td>
+
+                                    }
+                                </tr>
+
+                            }
+
+
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            }
+        </center>
+    </div>*@
+
