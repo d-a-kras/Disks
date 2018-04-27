@@ -1,0 +1,227 @@
+﻿
+@{
+    ViewBag.Title = "Мои диски";
+}
+
+@using Microsoft.AspNet.Identity
+@model IEnumerable<WebApplication2.Models.Disks>
+
+
+@if (Request.IsAuthenticated)
+{
+    <style>
+        img {
+            width: 100px; /* ширина картинки */
+            height: auto; /* высота картинки */
+            margin: 10px;
+        }
+    </style>
+
+
+
+
+    <div id="rec47322185" class="r t-rec t-rec_pt_120 t-rec_pb_90" style="padding-top:120px;padding-bottom:90px; " data-record-type="60">
+        <!-- T050 --><div class="t050">
+            <div class="t-container t-align_center">
+
+                <div class="t050__uptitle t-uptitle t-uptitle_sm" field="subtitle" style="text-transform:uppercase;">
+                    здесь хранятся фотографии ваших дисков
+                    <div class="t050__title t-title t-title_xxl" field="title" style="">Архив<br />фотографий дисков<br /></div> <div class="t050__descr t-descr t-descr_xxl" field="descr" style="">хранилище загруженных фотографий всех ваших дисков </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+
+            if ((item.Optom == null) || ((bool)!item.Optom))
+            {
+                <div id="rec47322704" class="r t-rec t-rec_pt_135 t-rec_pb_30" style="padding-top:135px;padding-bottom:30px; " data-record-type="33">
+                    <!-- T017 --><div class="t017">
+                        <div class="t-container t-align_center">
+
+                            <div class="t017__uptitle t-uptitle t-uptitle_md" field="subtitle" style="">сессия от @item.Data.Date.ToShortDateString()</div>
+                            <div class="t017__title t-title t-title_xxs" field="title" style="">Диски для @item.Marka</div>
+                        </div>
+                    </div>
+                </div>
+                <center>
+                    <div id="rec47323936" class="r t-rec t-rec_pt_30 t-rec_pb_30" style="padding-top:30px;padding-bottom:30px; " data-record-type="56">
+                        <!-- T046 --><div class="t046">
+                            <div class="t-container">
+
+                                <div class="t046__text t-text t-text_xs" field="text">Уникальный код SkrinDisk'a: <b>@item.Code</b></div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="rec47322600" class="r t-rec t-rec_pt_0 t-rec_pb_0" style="padding-top:0px;padding-bottom:0px; " data-animationappear="off" data-record-type="680">
+                        <!-- t680 --><div class="t680">
+                            <div class="t680__container t-container_100 ">
+                                <div class="t680__row t680__row_indent-20px t-row">
+                                    <div class="t680__tile t680__tile_left t680__tile_big-img t680__top" itemscope itemtype="http://schema.org/ImageObject">
+                                        <meta itemprop="image" content="images/tild3130-3162-4463-b766-666161623532__photo.jpg">
+
+                                        <div class="t680__bgimg t680__bgimg_lg t-bgimg" bgimgfield="gi_img__0" data-zoomable="yes" data-img-zoom-url="../../Picture/@User.Identity.Name/@item.Folder/auto.png" data-original="../../Picture/@User.Identity.Name/@item.Folder/auto.png" style="background: url('../../Picture/@User.Identity.Name/@item.Folder/auto.png') center center no-repeat;background-size: cover;"></div>
+                                    </div> <div class="t680__tile t680__tile_right ">
+                                        <div class="t680__bgimg_wrapper t680__bgimg_wrapper_left" itemscope itemtype="http://schema.org/ImageObject">
+
+                                            <meta itemprop="image" content="../../Picture/@User.Identity.Name/@item.Folder/auto.png">
+
+                                            <div class="t680__bgimg t680__bgimg_sm t-bgimg" bgimgfield="gi_img__1" data-zoomable="yes" data-img-zoom-url="../../Picture/@User.Identity.Name/@item.Folder/d1.png" data-original="../../Picture/@User.Identity.Name/@item.Folder/d1.png" style="background: url('../../Picture/@User.Identity.Name/@item.Folder/d1.png') center center no-repeat;background-size: cover;"></div>
+                                        </div>
+                                        <div class="t680__bgimg_wrapper t680__bgimg_wrapper_right" itemscope itemtype="http://schema.org/ImageObject">
+                                            <meta itemprop="image" content="">
+                                            <div class="t680__bgimg t680__bgimg_sm t-bgimg" bgimgfield="gi_img__2" data-zoomable="yes" data-img-zoom-url="../../Picture/@User.Identity.Name/@item.Folder/d2.png" data-original="../../Picture/@User.Identity.Name/@item.Folder/d2.png" style="background: url('../../Picture/@User.Identity.Name/@item.Folder/d2.png') center center no-repeat;background-size: cover;">
+                                            </div>
+                                        </div>
+                                        <div class="t680__gap"></div><div class="t680__bgimg_wrapper t680__bgimg_wrapper_left " itemscope itemtype="http://schema.org/ImageObject">
+                                            <meta itemprop="image" content="">
+                                            <div class="t680__bgimg t680__bgimg_sm t-bgimg" bgimgfield="gi_img__3" data-zoomable="yes" data-img-zoom-url="../../Picture/@User.Identity.Name/@item.Folder/d3.png" data-original="../../Picture/@User.Identity.Name/@item.Folder/d3.png" style="background: url('../../Picture/@User.Identity.Name/@item.Folder/d3.png') center center no-repeat;background-size: cover;">
+                                            </div>
+                                        </div>
+                                        <div class="t680__bgimg_wrapper t680__bgimg_wrapper_right" itemscope itemtype="http://schema.org/ImageObject">
+                                            <meta itemprop="image" content="">
+                                            <div class="t680__bgimg t680__bgimg_sm t-bgimg" bgimgfield="gi_img__4" data-zoomable="yes" data-img-zoom-url="../../Picture/@User.Identity.Name/@item.Folder/d4.png" data-original="../../Picture/@User.Identity.Name/@item.Folder/d4.png" style="background: url('../../Picture/@User.Identity.Name/@item.Folder/d4.png') center center no-repeat;background-size: cover;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--[if (IE 8)|(IE 9)]><style>.t680__bgimg_lg {	padding-bottom: 100%;
+                        }</style><![endif]-->
+                    </div>
+                </center>
+                if (!item.LOT)
+                {
+                    <center>
+                        <div id="rec47323694" class="r t-rec t-rec_pt_90 t-rec_pb_90" style="padding-top:90px;padding-bottom:90px; " data-record-type="208">
+                            <!-- T142A -->
+                            <div class="t142A">
+                                <div class="t-container_100">
+                                    <div class="t142A__wrapone">
+                                        <div class="t142A__wraptwo">
+                                            <a href="#" target="" class="t-btn " style="margin-top:0px;padding-top:0px; color:#ffffff;background-color:#199c68;">
+                                                <img style="height:80%;width:auto;" src="../../Content/security.png">
+                                            </a>
+
+                                            <a href="#" target="" class="t-btn t142A__marginleft20px" style="color:#000000;border:3px solid #000000;">
+                                                <table style="width:100%; height:100%;"><tr><td>@Html.ActionLink("Сообщить о краже", "TheftDisks", "Home", new { id = @item.Id }, null)</td></tr></table>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </center>
+                }
+                else
+                {
+                    <center>
+                        <div id="rec47323694" class="r t-rec t-rec_pt_90 t-rec_pb_90" style="padding-top:90px;padding-bottom:90px; " data-record-type="208">
+                            <!-- T142A -->
+                            <div class="t142A">
+                                <div class="t-container_100">
+                                    <div class="t142A__wrapone">
+                                        <div class="t142A__wraptwo">
+                                            <a href="" target="" class="t-btn " style="color:#ffffff;background-color:red;">
+                                                <img style="height:80%;width:auto;" src="../../Content/theft2.png">
+                                            </a>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </center>
+                }
+
+
+
+            }
+            else
+            {
+                <center>
+                    <div id="rec47323936" class="r t-rec t-rec_pt_30 t-rec_pb_30" style="padding-top:30px;padding-bottom:30px; " data-record-type="56">
+                        <!-- T046 --><div class="t046">
+                            <div class="t-container">
+
+                                <div class="t046__text t-text t-text_xs" field="text">Уникальный код SkrinDisk'a: <b>@item.Code</b></div> <a href="../Home/EditDisks/@item.Id">Присвоить владельца</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </center>
+
+            }
+        }
+
+    }
+    else
+    {
+
+    }
+}
+                    
+@*
+    <div class="jumbotron" style="padding-top:5px;padding-bottom:5px;border-radius:10px;">
+        <center>
+
+            <a class="btn btn-primary btn-lg" href="CreateDisks">Добавить диск</a>
+
+
+            @if (@Model != null)
+            {
+                <div id="searchresults">
+
+                    <table class="table">
+                        <thead class="thead-inverse">
+                            <tr>
+
+                                <th></th>
+                                <th>Код диска</th>
+                                <th>Отметка о краже</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td><div style="height:100px;width:100px;background-image:url(@item.Folder+'/1.png'')"></div></td>
+                                    <td>@item.Code</td>
+
+                                    @if (!item.LOT)
+                                    {
+                                        <td> <img src="../../Content/security.png"></td>
+                                        <td>@Html.ActionLink("Сообщить о краже", "TheftDisks", "Home", new { id = @item.Id }, null)</td>
+                                    }
+                                    else
+                                    {
+                                        <td> </td>
+                                        <td></td>
+
+                                    }
+                                </tr>
+
+                            }
+
+
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            }
+        </center>
+    </div>*@
+
