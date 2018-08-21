@@ -27,9 +27,15 @@ namespace WebApplication2
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-           
+            routes.MapRoute(
+               name: "Default4",
+               url: "{controller}/{action}/{id}/{pin}",
+               defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, pin = UrlParameter.Optional }
+           );
 
-           
+
+
+
         }
     }
 }

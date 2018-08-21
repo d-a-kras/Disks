@@ -1,0 +1,130 @@
+﻿@model WebApplication2.Models.RegisterViewModel
+
+
+<div id="rec47325359" class="r t-rec t-rec_pt_60" style="padding-top:60px; " data-animationappear="off" data-record-type="698">
+    <!-- t698 --><!-- cover --><div class="t-cover" id="recorddiv47325359" bgimgfield="img" style="height:100vh; background-image:url('../../images/tild6534-3036-4165-a632-363563666466__-__resize.jpg');">
+        <div class="t-cover__carrier" id="coverCarry47325359" data-content-cover-id="47325359" data-content-cover-bg="../../images/tild6534-3036-4165-a632-363563666466.jpg" data-content-cover-height="100vh" data-content-cover-parallax="" style="background-image:url('');height:100vh;background-attachment:scroll; "></div> <div class="t-cover__filter" style="height:100vh;background-color:#29221c;filter: alpha(opacity:70); KHTMLOpacity: 0.70; MozOpacity: 0.70; opacity: 0.70;"></div> <div class="t698">
+            <div class="t-container ">
+                <div class="t-width t-width_8 t698__mainblock">
+                    <div class="t-cover__wrapper t-valign_middle" style="height:100vh;">
+                        <div class="t698__mainwrapper" data-hook-content="covercontent">
+                            <div class="t698__title t-title t-title_xs" style="" field="title">Зарегистрироваться</div>
+                            <div class="t698__descr t-descr t-descr_md" style="" field="descr">Для доступа ко всему функционалу сервиса SkrinDisk</div>
+                            <div class="t698__form-bottom-text t-text t-text_xs" field="text">Пароль должен содержать цифры и буквы латинского алфавита</div>
+                            <div>
+                                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <!-- NO ONE SERVICES CONNECTED -->
+                        <div class="t-form js-form-proccess t-form_inputs-total_4 js-successbox t-form__successbox t-text t-text_md" style="display:none;"></div>
+                        <div class="t-form__inputsbox">
+                            <div class="t-input-group t-input-group_em" data-input-lid="1495646533382">
+                                <div class="t-input-block">
+
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control t-input js-tilda-rule ", @style = "color:#000000; background-color:#ffffff; border-radius: 7px; -moz-border-radius: 7px; -webkit-border-radius: 7px; min-width:100%", @placeholder = "E-mail" })
+
+                                    <div class="t-input-error"></div>
+                                </div>
+                            </div>
+
+
+                            <div class="t-input-group t-input-group_ph" data-input-lid="1495646545048">
+                                <div class="t-input-block">
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "t-input form-control", placeholder = "Телефон", style = "color:#000000; background-color:#ffffff; border-radius: 7px; -moz-border-radius: 7px; -webkit-border-radius: 7px;min-width:100%" })
+
+                                </div>
+                            </div>
+
+                            <div class="t-input-group t-input-group_nm" data-input-lid="1495646567135">
+                                <div class="t-input-block">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "t-input js-tilda-rule form-control", placeholder = "Пароль", style = "color:#000000; background-color:#ffffff; border-radius: 7px; -moz-border-radius: 7px; -webkit-border-radius: 7px;min-width:100%" })
+
+                                    <div class="t-input-error">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="t-input-group t-input-group_nm" data-input-lid="1520850729282">
+                                <div class="t-input-block">
+
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "t-input js-tilda-rule form-control", @style = "color:#000000; background-color:#ffffff; border-radius: 7px; -moz-border-radius: 7px; -webkit-border-radius: 7px;min-width:100%", @placeholder = "Подтверждение пароля", })
+
+                                    <div class="t-input-error">
+                                    </div>
+                                </div>
+                            </div> <div class="t-form__errorbox-middle">
+                                <div class="js-errorbox-all t-form__errorbox-wrapper" style="display:none;">
+                                    <div class="t-form__errorbox-text t-text t-text_md">
+                                        <p class="t-form__errorbox-item js-rule-error js-rule-error-all"></p>
+                                        <p class="t-form__errorbox-item js-rule-error js-rule-error-req"></p>
+                                        <p class="t-form__errorbox-item js-rule-error js-rule-error-email"></p>
+                                        <p class="t-form__errorbox-item js-rule-error js-rule-error-name"></p>
+                                        <p class="t-form__errorbox-item js-rule-error js-rule-error-phone"></p>
+                                        <p class="t-form__errorbox-item js-rule-error js-rule-error-string"></p>
+                                    </div>
+                                </div>
+                            </div> <div class="t-form__submit">
+                                <button type="submit" class="t-submit" style="color:#ffffff;background-color:#ff7300;border-radius:7px; -moz-border-radius:7px; -webkit-border-radius:7px;">Зарегистрироваться</button>
+                            </div>
+
+                            <div class="t-form__errorbox-bottom"> <div class="js-errorbox-all t-form__errorbox-wrapper" style="display:none;"> <div class="t-form__errorbox-text t-text t-text_md"> <p class="t-form__errorbox-item js-rule-error js-rule-error-all"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-req"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-email"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-name"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-phone"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-string"></p> </div> </div> </div>
+
+                            <style>
+                                #rec47325359 input::-webkit-input-placeholder {
+                                    color: #000000;
+                                    opacity: 0.5;
+                                }
+
+                                #rec47325359 input::-moz-placeholder {
+                                    color: #000000;
+                                    opacity: 0.5;
+                                }
+
+                                #rec47325359 input:-moz-placeholder {
+                                    color: #000000;
+                                    opacity: 0.5;
+                                }
+
+                                #rec47325359 input:-ms-input-placeholder {
+                                    color: #000000;
+                                    opacity: 0.5;
+                                }
+
+                                #rec47325359 textarea::-webkit-input-placeholder {
+                                    color: #000000;
+                                    opacity: 0.5;
+                                }
+
+                                #rec47325359 textarea::-moz-placeholder {
+                                    color: #000000;
+                                    opacity: 0.5;
+                                }
+
+                                #rec47325359 textarea:-moz-placeholder {
+                                    color: #000000;
+                                    opacity: 0.5;
+                                }
+
+                                #rec47325359 textarea:-ms-input-placeholder {
+                                    color: #000000;
+                                    opacity: 0.5;
+                                }
+                            </style>
+                        </div>
+
+                        <div class="t698__form-bottom-text t-text t-text_xs" field="text">Вы соглашаетесь с нашими условиями</div>
+}
+                            </div>
+                        </div>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">$('#rec47325359').find('.js-form-proccess').on('tildaform:aftererror', function (e) { e.preventDefault(); t698_fixcontentheight('47325359'); }); $('.t698').bind('displayChanged', function () { t698_fixcontentheight('47325359'); });</script>
+</div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

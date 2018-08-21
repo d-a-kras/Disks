@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +16,10 @@ using System.Threading;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using NLog;
+using iTextSharp;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace WebApplication2.Controllers
 {
@@ -24,14 +28,376 @@ namespace WebApplication2.Controllers
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private DisksContext db = new DisksContext();
+        private PDFContext dbpdf = new PDFContext();
         private StoreContext dbo = new StoreContext();
         private AutoServiceContext dbas = new AutoServiceContext();
         private VIPContext dbvip = new VIPContext();
+        private ApplicationUserManager _userManager;
 
 
         public ActionResult Index()
         {
             return View();
+        }
+
+        [auth]
+        public ActionResult SuccessSellDisksPin()
+        {
+            return View();
+        }
+       
+
+        [auth]
+        public ActionResult SellDisks()
+        {
+            return View();
+        }
+
+        [auth]
+        [HttpPost]
+        public async Task<ActionResult> SellKod(string code, string email)
+        {
+            
+            if ((code == "") && (code.Length != 10))
+            {
+                return HttpNotFound();
+            }
+           
+            int check = 0;
+         
+            try
+            {
+                Disks disks;
+           
+                disks = db.ListDisks.Where(m => m.Code == code).Single();
+                if (disks.LOT)
+                {
+                    check = 1;
+                    if (Const.SendMVD)
+                    {
+                        try
+                        {
+                            await EmailService2.SendEmailAsync(Const.PostMvd, Const.Tema, Const.MessageMVDAС + " " + disks.Code.ToString());
+                        }
+                        catch { }
+                    }
+                }
+                else if (disks.IdUser ==  User.Identity.Name )
+                {
+                    bool b = await CheckLogin(email);
+                    if (b) {
+                        check = 5;
+                        disks.IdUser = email;
+                        db.Entry(disks).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Home/SuccessSellDisksPin");
+                    }
+                    else {
+                        check = 4;
+                    }
+                    
+
+                }
+                else
+                {
+                    check = 2;
+                    
+                }
+               
+            }
+            catch
+            {
+                check = 3;
+            }
+            logger.Trace("check=" + check + " " + code + " " + User.Identity.Name);
+
+            ViewBag.Check = check;
+            return PartialView();
+
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        public async Task<bool> CheckLogin(String email)
+        {
+            
+                var user = await UserManager.FindByNameAsync(email);
+                if (user != null)
+                {
+                    return true;
+                }
+            
+               
+                    return false;
+               
+        }
+
+
+        [auth]
+        public ActionResult CheckCreateDisksPin()
+        {
+
+            return View();
+        }
+
+        [auth]
+        public ActionResult SuccessCreateDisksPin()
+        {
+
+            return View();
+        }
+
+        [auth]
+        [HttpPost]
+        public ActionResult UpdateDisksWithPinSave(string id)
+        {
+            // logger.Trace("Save disks"+disks.Id);
+            
+           
+                bool vkod = true;
+                try
+                {
+                Disks disks;
+
+                    disks = db.ListDisks.Where(m => m.Id.ToString() == id).Single();
+                    disks.Paid = true;
+                    disks.IdUser = User.Identity.Name;
+                disks.checkpin = -1;
+                     disks.Folder = disks.Id.ToString();
+                    string currentFolderName = Server.MapPath("~/Picture/" + disks.Folder);
+                    DirectoryInfo nf = new DirectoryInfo(currentFolderName);
+                    
+                    if (!nf.Exists)
+                    {
+                        var path = "~/Picture/" ;
+                        var Dir = new DirectoryInfo(Request.MapPath(path));
+                        nf = Dir.CreateSubdirectory(disks.Id.ToString());
+                    }
+                   
+
+                    try
+                    {
+                        string[] files = Directory.GetFiles(Server.MapPath("~/Picture/" + disks.IdUser + "/temp/"), "d*");
+                        int i = 1;
+                        foreach (string srcFilePath in files)
+                        {
+                            System.IO.File.Move(srcFilePath, nf.ToString() + "/d" + i + ".png");
+                            i++;
+                        }
+                        files = Directory.GetFiles(Server.MapPath("~/Picture/" + disks.IdUser + "/temp/"), "auto*");
+
+                        foreach (string srcFilePath in files)
+                        {
+                            System.IO.File.Move(srcFilePath, nf.ToString() + "/auto.png");
+
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        logger.Trace("Ошибка перемещения файла(ов): " + e.Message);
+                    }
+
+                    
+
+                    db.Entry(disks).State = EntityState.Modified;
+                    db.SaveChanges();
+
+
+                    try
+                    {
+                       EmailService2.SendEmailAsync(Const.PostAdmin, "Новый код", Const.MessageAdminACD + " " + disks.Code);
+                    }
+                    catch
+                    {
+                        logger.Trace("error send mail admin");
+                    }
+                    try
+                    {
+                       EmailService2.SendEmailAsync(disks.IdUser, "Новый код", Const.MessageUser + " " + disks.Code);
+                    }
+                    catch
+                    {
+                        logger.Trace("error send mail admin");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.Trace(ex.StackTrace);
+                    
+                }
+            
+            return RedirectToAction("SuccessCreateDisksPin");
+        }
+
+        public ActionResult CreateDisksPinRoute(int id, int pin)
+        {
+            Disks disks = db.ListDisks.Where(m => m.Id == id).Single();
+
+            if ((disks == null) || (disks.pincode != pin))
+            {
+                return HttpNotFound();
+            }
+            return RedirectToAction("CreateDisksPin", "Home", disks);
+        }
+
+        [auth]
+        public ActionResult CreateDisksPin(Disks disks)
+        {
+            
+
+            if ((disks==null))
+            {
+                return HttpNotFound();
+            }
+            int price = 0;
+            bool vip = false;
+          
+
+            @ViewBag.CP = 0;
+            logger.Debug("CreateDisksPin");
+            var path = "~/Picture/" + User.Identity.Name;
+            if (!Directory.Exists(Request.MapPath(path)))
+            {
+                path = "~/Picture/";
+                DirectoryInfo Dir = new DirectoryInfo(Request.MapPath(path));
+                Dir.CreateSubdirectory(@User.Identity.Name);
+                path = "~/Picture/" + User.Identity.Name;
+                Dir = new DirectoryInfo(Request.MapPath(path));
+                Dir.CreateSubdirectory("temp");
+
+            }
+            else
+            {
+                path = "~/Picture/" + User.Identity.Name + "/temp";
+                if (Directory.Exists(Request.MapPath(path)))
+                {
+                    DirectoryInfo dirInfo = new DirectoryInfo(Request.MapPath(path));
+
+                    foreach (FileInfo file in dirInfo.GetFiles())
+                    {
+                        file.Delete();
+                    }
+                }
+                else
+                {
+                    path = "~/Picture/" + User.Identity.Name;
+                    DirectoryInfo Dir = new DirectoryInfo(Request.MapPath(path));
+                    Dir.CreateSubdirectory("temp");
+
+                }
+            }
+
+            
+            try {
+               
+                disks.Data = DateTime.Now;
+                disks.Vip = vip;
+                disks.IdOrder = 0;
+                db.Entry(disks).State = EntityState.Modified;
+                db.SaveChanges();
+
+
+            }
+            catch(Exception ex)
+            {
+
+               
+                
+                    logger.Trace(ex.Message);
+                    return RedirectToAction("ErrorDisks");
+                    
+                
+            }
+
+            
+            
+            return View(disks);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CheckPinAndCode(string code, string pin)
+        {
+
+            try
+            {
+                await EmailService2.SendEmailAsync(Const.PostAdmin, Const.Tema, Const.MessageAdmin + code);
+            }
+            catch { }
+            if ((code == "") && (code.Length != 10))
+            {
+                return HttpNotFound();
+            }
+            // str = "QWERTYUIOP";
+            int check = 0;
+            //int co = db.ListDisks.Count();
+            try
+            {
+                Disks disks;
+           
+                disks = db.ListDisks.Where(m => m.Code == code).Single();
+                if (disks.checkpin > 0)
+                {
+                    disks.checkpin++;
+                }
+                db.Entry(disks).State = EntityState.Modified;
+                db.SaveChanges();
+
+                if (disks.LOT)
+                {
+                    check = 1;
+                    if (Const.SendMVD)
+                    {
+                        try
+                        {
+                            await EmailService2.SendEmailAsync(Const.PostMvd, Const.Tema, Const.MessageMVDAС + " " + disks.Code.ToString());
+                        }
+                        catch { }
+                    }
+                }
+                else if (disks.pincode.ToString() == pin)
+                {
+                    if (disks.checkpin == -1)
+                    {  
+                        check = 4;
+
+                    }
+                    else
+                    {
+
+                        check = 5;
+                        ViewBag.IdDisks = disks.Id;
+                        ViewBag.pin = disks.pincode;
+                        //  return RedirectToAction("CreateDisksPin","Home", disks);
+                    }
+
+                }
+                else
+                {
+                    check = 2;
+                    
+                }
+               
+            }
+            catch
+            {
+                check = 3;
+            }
+            logger.Trace("check=" + check + " " + code + " " + User.Identity.Name);
+
+            ViewBag.Check = check;
+           
+            return PartialView();
+
         }
 
         public ActionResult AdminPanelServices()
@@ -41,6 +407,24 @@ namespace WebApplication2.Controllers
                 List<AutoService> las = new List<AutoService>();
                 las = dbas.ListAutoServices.Where(x => x.Id >= 0).ToList();
                 return View(las);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+
+        }
+
+        public ActionResult AdminPanelCreatePinCode()
+        {
+            if (User.Identity.Name == Const.AdminLogin)
+            {
+
+                var model = new MainModel();
+               
+                model.Items = db.ListDisks.Where(m => m.pincode != null).ToList();
+                return View(model);
+                
             }
             else
             {
@@ -100,10 +484,15 @@ namespace WebApplication2.Controllers
                 autoS.Picture = imageData;
 
             }
+            else  {
+
+            }
             dbas.Entry(autoS).State = EntityState.Modified;
             dbas.SaveChanges();
             return RedirectToAction("AdminPanelServices");
         }
+
+       
 
         [HttpPost]
         public ActionResult CreateAutoService(AutoService autoS, HttpPostedFileBase uploadImage)
@@ -129,6 +518,127 @@ namespace WebApplication2.Controllers
             }
 
             return RedirectToAction("PublishServices");
+        }
+
+      
+
+        [HttpPost]
+        public FileResult CreatePDF(MainModel mm)
+        {
+            PDF pdf = new PDF();
+            //Объект документа пдф
+           
+               
+                dbpdf.ListPDF.Add(pdf);
+                dbpdf.SaveChanges();
+                var ld = mm.Items;
+               ld = ld.FindAll(t => t.printPDF == true);
+            
+                iTextSharp.text.Document doc = new iTextSharp.text.Document();
+
+                //Создаем объект записи пдф-документа в файл
+                PdfWriter.GetInstance(doc, new FileStream(Server.MapPath("~/PDF/"+pdf.Id + ".pdf"), FileMode.Create));
+
+                //Открываем документ
+                doc.Open();
+
+                //Определение шрифта необходимо для сохранения кириллического текста
+                //Иначе мы не увидим кириллический текст
+                //Если мы работаем только с англоязычными текстами, то шрифт можно не указывать
+                BaseFont baseFont = BaseFont.CreateFont(Server.MapPath("~/PDF/arial.ttf"), BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                iTextSharp.text.Font font = new iTextSharp.text.Font(baseFont, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL);
+
+                //Обход по всем таблицам датасета (хотя в данном случае мы можем опустить
+                //Так как в нашей бд только одна таблица)
+                
+
+                
+                foreach (Disks d in ld)
+                {
+                    //Создаем объект таблицы и передаем в нее число столбцов таблицы из нашего датасета
+                    PdfPTable table = new PdfPTable(2);
+
+                    //Добавим в таблицу общий заголовок
+                    PdfPCell cell = new PdfPCell(new Phrase("Уникальный код Skrindisk'a", font));
+
+                    cell.Colspan = 2;
+                    cell.HorizontalAlignment = 1;
+                    //Убираем границу первой ячейки, чтобы были как заголовок
+                    cell.Border = 0;
+                    table.AddCell(cell);
+
+                    //Сначала добавляем заголовки таблицы
+
+                    cell = new PdfPCell(new Phrase(new Phrase("Уникальный код", font)));
+                    cell.BackgroundColor = iTextSharp.text.BaseColor.LIGHT_GRAY;
+                    table.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase(new Phrase("Пин-код", font)));
+                    cell.BackgroundColor = iTextSharp.text.BaseColor.LIGHT_GRAY;
+                    table.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase(d.Code, font));
+                cell.BackgroundColor = iTextSharp.text.BaseColor.WHITE;
+                table.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase(d.pincode.ToString(), font));
+                cell.BackgroundColor = iTextSharp.text.BaseColor.WHITE;
+                table.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Перед активацией кода зарегистрируйтесь в системе или войдите под существующей учетной записью.", font));
+
+                cell.Colspan = 2;
+                cell.HorizontalAlignment = 1;
+                //Убираем границу первой ячейки, чтобы были как заголовок
+                cell.Border = 0;
+                table.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("              ", font));
+
+                cell.Colspan = 2;
+                cell.HorizontalAlignment = 1;
+                //Убираем границу первой ячейки, чтобы были как заголовок
+                cell.Border = 0;
+                table.AddCell(cell);
+
+
+                doc.Add(table);
+                }
+            if (ld.Count < 1)
+            {
+                PdfPTable table = new PdfPTable(2);
+
+                //Добавим в таблицу общий заголовок
+                PdfPCell cell = new PdfPCell(new Phrase("Уникальный код Skrindisk'a", font));
+
+                cell.Colspan = 2;
+                cell.HorizontalAlignment = 1;
+                //Убираем границу первой ячейки, чтобы были как заголовок
+                cell.Border = 0;
+                table.AddCell(cell);
+
+                //Сначала добавляем заголовки таблицы
+
+                cell = new PdfPCell(new Phrase(new Phrase("Уникальный код", font)));
+                cell.BackgroundColor = iTextSharp.text.BaseColor.LIGHT_GRAY;
+                table.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase(new Phrase("Пин-код", font)));
+                cell.BackgroundColor = iTextSharp.text.BaseColor.LIGHT_GRAY;
+                table.AddCell(cell);
+                doc.Add(table);
+            }
+            //Закрываем документ
+            doc.Close();
+           
+            string file_path = Server.MapPath("~/PDF/"+pdf.Id+".pdf");
+            // Тип файла - content-type
+            string file_type = "application/pdf";
+            // Имя файла - необязательно
+            string file_name = pdf.Name + ".pdf";
+            return File(file_path, file_type, file_name);
+            
+
         }
 
         [HttpGet]
@@ -196,6 +706,90 @@ namespace WebApplication2.Controllers
             }
 
             return View(order);
+        }
+
+        
+        [auth]
+        public ActionResult UpdateDisksWithPin(int idd)
+        {
+            int price = 0;
+            bool vip = false;
+            
+             var path = "~/Picture/" + User.Identity.Name;
+            if (!Directory.Exists(Request.MapPath(path)))
+            {
+                path = "~/Picture/";
+                DirectoryInfo Dir = new DirectoryInfo(Request.MapPath(path));
+                Dir.CreateSubdirectory(@User.Identity.Name);
+                path = "~/Picture/" + User.Identity.Name;
+                Dir = new DirectoryInfo(Request.MapPath(path));
+                Dir.CreateSubdirectory("temp");
+
+            }
+            else
+            {
+                path = "~/Picture/" + User.Identity.Name + "/temp";
+                if (Directory.Exists(Request.MapPath(path)))
+                {
+                    DirectoryInfo dirInfo = new DirectoryInfo(Request.MapPath(path));
+
+                    foreach (FileInfo file in dirInfo.GetFiles())
+                    {
+                        file.Delete();
+                    }
+                }
+                else
+                {
+                    path = "~/Picture/" + User.Identity.Name;
+                    DirectoryInfo Dir = new DirectoryInfo(Request.MapPath(path));
+                    Dir.CreateSubdirectory("temp");
+
+                }
+            }
+
+            @ViewBag.CP = 0;
+            logger.Debug("UpdateDisksPin");
+            Disks disks;
+             try {
+             disks= db.ListDisks.Single(t => t.Id==idd);
+            path = "~/Picture/" + disks.Id;
+                DirectoryInfo dirInfo=null;
+            if (!Directory.Exists(Request.MapPath(path)))
+            {
+                path = "~/Picture/";
+                DirectoryInfo Dir = new DirectoryInfo(Request.MapPath(path));
+                    dirInfo = Dir.CreateSubdirectory(disks.Id.ToString());
+                
+
+            }else{
+                  dirInfo = new DirectoryInfo(Request.MapPath(path));
+
+                    foreach (FileInfo file in dirInfo.GetFiles())
+                    {
+                        file.Delete();
+                    }
+                
+            }
+                disks.Data = DateTime.Now;
+                disks.Vip = vip;
+                disks.Folder=dirInfo.Name.ToString();
+                disks.IdOrder = 0;
+                db.Entry(disks).State = EntityState.Modified;
+                db.SaveChanges();
+
+
+            }
+            catch(Exception ex)
+            {
+
+              
+                    logger.Trace(ex.Message);
+                    return RedirectToAction("ErrorDisks");
+                    
+                
+            }
+
+            return View(disks);
         }
 
         [auth]
@@ -402,6 +996,12 @@ namespace WebApplication2.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult CreateCodeDisksPin()
+        {
+
+            return View();
+        }
+        
         public ActionResult CreateDisks2()
         {
 
@@ -423,13 +1023,14 @@ namespace WebApplication2.Controllers
         public ActionResult ListDisks()
         {
             
-            var mylistDisks = db.ListDisks.Where(a => (a.IdUser == User.Identity.Name) && (a.Paid == true)).ToList();
-            if (mylistDisks.Count < 0)
-            {
-                return HttpNotFound();
-            }
-            return View(mylistDisks);
-
+                var mylistDisks = db.ListDisks.Where(a => (a.IdUser == User.Identity.Name) && (a.Paid == true)).ToList();
+                if (mylistDisks.Count < 0)
+                {
+                    return HttpNotFound();
+                }
+                return View(mylistDisks);
+            
+            
         }
 
         [auth]
@@ -682,7 +1283,7 @@ namespace WebApplication2.Controllers
                     }
                     catch { }
                 }
-                    disks.SendMVD = true;
+                disks.SendMVD = true;
                 db.Entry(disks).State = EntityState.Modified;
                 db.SaveChanges();
             }
@@ -690,7 +1291,37 @@ namespace WebApplication2.Controllers
             return RedirectToAction("ListDisks");
         }
 
+        [HttpPost]
+        public ActionResult NewCodeAndPin()
+        {
+            
+                Disks disks = new Disks(true);
+                db.Entry(disks).State = EntityState.Added;
+                db.SaveChanges();
+                
+            List<Disks> ldisks;
 
+            ldisks = db.ListDisks.Where(m => m.pincode != null).ToList();
+            return RedirectToAction("AdminPanelCreatePinCode",ldisks);
+        }
+
+        [HttpPost]
+        public ActionResult PartialListCodeAndPin()
+        {
+            Disks disks = new Disks(true);
+            db.Entry(disks).State = EntityState.Added;
+            db.SaveChanges();
+            List<Disks> ldisks;
+          
+              
+           ldisks = db.ListDisks.Where(m => m.pincode != null).ToList();
+
+            return PartialView(ldisks);
+
+
+        }
+
+       
 
         [HttpPost]
         public async Task<ActionResult> CheckDisk(string code, string number)
@@ -739,6 +1370,8 @@ namespace WebApplication2.Controllers
             return PartialView();
 
         }
+
+       
 
         [HttpPost]
         public async Task<ActionResult> EditkDisk1(string code, string number)
@@ -904,14 +1537,20 @@ namespace WebApplication2.Controllers
 
         public ActionResult ListServicesForCity(String city)
         {
-
-            var listAutoServices = dbas.ListAutoServices.Where(a => (a.City==city)&&(a.Publish==true)).ToList();
-            if (listAutoServices.Count < 0)
+           
+            try
             {
-                return HttpNotFound();
+                List<AutoService> listAutoServices = dbas.ListAutoServices.Where(a => (a.City == city) && (a.Publish == true)).ToList();
+                if (listAutoServices.Count < 0)
+                {
+                    return HttpNotFound();
+                }
+                return PartialView(listAutoServices);
             }
-            return PartialView(listAutoServices);
-
+            catch {
+               
+            }
+            return HttpNotFound();
         }
 
 
@@ -1308,40 +1947,41 @@ namespace WebApplication2.Controllers
                     disks.Paid = true;
                     db.Entry(disks).State = EntityState.Modified;
                     db.SaveChanges();
-                    string currentFolderName = Server.MapPath("~/Picture/" + disks.IdUser);
+                    string currentFolderName = Server.MapPath("~/Picture/" + disks.Id);
                     DirectoryInfo drInfo = new DirectoryInfo(currentFolderName);
                     DirectoryInfo nf;
                     if (drInfo.Exists)
                     {
-                        List<DirectoryInfo> di = drInfo.GetDirectories().ToList();
-                        nf = drInfo.CreateSubdirectory((di.Count + 1).ToString());
+
+
+                        foreach (FileInfo file in drInfo.GetFiles())
+                        {
+                            file.Delete();
+                        }
 
                     }
                     else
                     {
                         var path = "~/Picture/";
                         DirectoryInfo Dir = new DirectoryInfo(Request.MapPath(path));
-                        Dir.CreateSubdirectory(disks.IdUser);
-                        path = "~/Picture/" + disks.IdUser;
-                        Dir = new DirectoryInfo(Request.MapPath(path));
-                        nf = Dir.CreateSubdirectory("1");
-                        //log
+                        Dir.CreateSubdirectory(disks.Id.ToString());
                     }
 
                     try
                     {
+
                         string[] files = Directory.GetFiles(Server.MapPath("~/Picture/" + disks.IdUser + "/temp/"), "d*");
                         int i = 1;
                         foreach (string srcFilePath in files)
                         {
-                            System.IO.File.Move(srcFilePath, nf.ToString() + "/d" + i + ".png");
+                            System.IO.File.Move(srcFilePath, drInfo.ToString() + "/d" + i + ".png");
                             i++;
                         }
                         files = Directory.GetFiles(Server.MapPath("~/Picture/" + disks.IdUser + "/temp/"), "auto*");
 
                         foreach (string srcFilePath in files)
                         {
-                            System.IO.File.Move(srcFilePath, nf.ToString() + "/auto.png");
+                            System.IO.File.Move(srcFilePath, drInfo.ToString() + "/auto.png");
 
                         }
                     }
@@ -1350,7 +1990,7 @@ namespace WebApplication2.Controllers
                         logger.Trace("Ошибка перемещения файла(ов): " + e.Message);
                     }
 
-                    disks.Folder = nf.Name.ToString();
+                    disks.Folder = disks.Id.ToString();
 
                     db.Entry(disks).State = EntityState.Modified;
                     db.SaveChanges();

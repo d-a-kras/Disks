@@ -1,0 +1,64 @@
+2018-08-01 00:03:09.5156 | WebApplication2.Controllers.HomeController.UpdateDisksWithPinSave | TRACE | Save disks0 
+
+2018-08-01 00:03:09.5397 | WebApplication2.Controllers.HomeController.UpdateDisksWithPinSave | TRACE |    в System.Data.Entity.Internal.InternalContext.SaveChanges()
+   в System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   в System.Data.Entity.DbContext.SaveChanges()
+   в WebApplication2.Controllers.HomeController.UpdateDisksWithPinSave(Disks disks) в D:\drive\разработки\Disks\WebApplication2\Controllers\HomeController.cs:строка 159 
+
+2018-08-01 00:03:39.2184 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-08-01 00:06:34.0020 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-08-01 00:08:37.6485 | WebApplication2.Controllers.HomeController.UpdateDisksWithPinSave | TRACE |    в System.Data.Entity.Internal.InternalContext.SaveChanges()
+   в System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   в System.Data.Entity.DbContext.SaveChanges()
+   в WebApplication2.Controllers.HomeController.UpdateDisksWithPinSave(Disks disks) 
+
+2018-08-01 00:08:53.8425 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-08-01 00:12:56.3867 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-08-01 00:13:22.8256 | WebApplication2.Controllers.HomeController.UpdateDisksWithPinSave | TRACE | Ошибка перемещения файла(ов): Не удалось найти часть пути "D:\drive\разработки\Disks\WebApplication2\Picture\Admin\temp". 
+
+2018-08-01 00:23:59.0813 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-08-01 00:32:42.4506 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-08-01 00:55:06.8509 | WebApplication2.Controllers.HomeController.SellKod | TRACE | check=2 3QЮQQQ1QIL d.a.kras@mail.ru 
+
+2018-08-01 22:15:05.2085 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-08-01 22:21:17.1464 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-08-01 22:21:46.3579 | WebApplication2.Controllers.HomeController.UpdateDisksWithPinSave | TRACE | Ошибка перемещения файла(ов): Невозможно создать файл, так как он уже существует.
+ 
+
+2018-08-01 22:23:17.2586 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-08-01 22:25:13.4589 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-08-01 22:25:38.0835 | WebApplication2.Controllers.HomeController.UpdateDisksWithPinSave | TRACE | Ошибка перемещения файла(ов): Невозможно создать файл, так как он уже существует.
+ 
+
+2018-08-01 22:25:46.5374 | WebApplication2.Controllers.HomeController+<CheckPinAndCode>d__19.MoveNext | TRACE | check=4 3QЮQQQ1QIL d.a.kras@mail.ru 
+
+2018-08-01 22:29:33.9613 | WebApplication2.Controllers.HomeController+<CheckPinAndCode>d__19.MoveNext | TRACE | check=4 3QЮQQQ1QIL d.a.kras@mail.ru 
+
+2018-08-01 22:31:04.9493 | WebApplication2.Controllers.HomeController+<CheckPinAndCode>d__19.MoveNext | TRACE | check=4 3QЮQQQ1QIL d.a.kras@mail.ru 
+
+2018-08-01 22:31:23.0521 | WebApplication2.Controllers.HomeController+<CheckPinAndCode>d__19.MoveNext | TRACE | check=3 3QЮQQQ1QI1 d.a.kras@mail.ru 
+
+2018-08-01 22:31:37.1760 | WebApplication2.Controllers.HomeController+<CheckPinAndCode>d__19.MoveNext | TRACE | check=2 3QЮQQQ1QIL d.a.kras@mail.ru 
+
+2018-08-01 22:33:40.8079 | WebApplication2.Controllers.HomeController+<CheckPinAndCode>d__19.MoveNext | TRACE | check=2 3QЮQQQ1QIL d.a.kras@mail.ru 
+
+2018-08-01 22:36:00.6546 | WebApplication2.Controllers.HomeController.SellKod | TRACE | check=4 3QЮQQQ1QIL d.a.kras@mail.ru 
+
+2018-08-01 22:36:47.9279 | WebApplication2.Controllers.HomeController.SellKod | TRACE | check=4 3QЮQQQ1QIL d.a.kras@mail.ru 
+
+2018-08-01 22:37:40.9544 | WebApplication2.Controllers.HomeController.SellKod | TRACE | check=2 3QЮQQQ1QIL d.a.kras@mail.ru 
+
+2018-08-01 22:44:09.2520 | WebApplication2.Controllers.HomeController.SellKod | TRACE | check=2 3QЮQQQ1QIL skrindisk@admin.panel 
+
+2018-08-01 22:47:09.4812 | WebApplication2.Controllers.HomeController.SellKod | TRACE | check=2 3QЮQQQ1QIL d.a.kras@mail.ru 
+

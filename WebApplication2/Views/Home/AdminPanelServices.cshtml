@@ -142,10 +142,10 @@
                         <td>@item.City</td>
                         <td>@item.Description</td>
                         <td>
-                            <a href="EditAutoService/@item.Id">Редактировать</a> <a href="DelAutoService/@item.Id">Удалить</a>
+                            <a href="Home/EditAutoService/@item.Id">Редактировать</a> <a href="Home/DelAutoService/@item.Id">Удалить</a>
                             @if ((item.Publish == null) || (!(bool)item.Publish)) {
                                 {
-                        <a href="PublishAutoService/@item.Id">Опубликовать</a>
+                        <a href="Home/PublishAutoService/@item.Id">Опубликовать</a>
                                 }
                             }
                         </td>

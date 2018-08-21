@@ -1,0 +1,106 @@
+﻿@model WebApplication2.Models.MainModel
+<div class="jumbotron" style="padding-top:5px;padding-bottom:5px;border-radius:10px;">
+    <center>
+        <br />
+        <br />
+        
+                <form method="POST" action="NewCodeAndPin" >
+                    
+                    
+                    <input type="submit" name="submit-button" class="btn btn-primary btn-lg" value="Создать код с пин-кодом">
+                   
+
+                </form>
+        
+        <br />
+
+        <div id="listcodepin">
+            @if (@Model != null)
+            {
+
+                using (Html.BeginForm("CreatePDF", "Home", FormMethod.Post, new { onsubmit = "return validate_form();" }))
+                {
+        <table class="table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th></th>
+                    <th>Выбрать</th>
+                    <th>Код для дисков</th>
+                    <th>Пин-код</th>
+
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{ int i = 0;
+            foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @(i + 1)
+                    </td>
+
+
+                    <td>
+
+                        @Html.CheckBox(string.Format("Items[{0}].printPDF", i), item.printPDF, new {  @class = "checkPDF" })
+                    </td>
+
+                    <td> @Html.TextBox(string.Format("Items[{0}].Code", i), item.Code, new { @readonly = "readonly", @class="checkPDF" })</td>
+                    <td> @Html.TextBox(string.Format("Items[{0}].pincode", i), item.pincode.ToString(), new { @readonly = "readonly" })</td>
+
+
+                </tr>
+        i++;
+
+    }
+
+                }
+
+
+
+
+
+
+
+
+            </tbody>
+
+        </table> @Html.HiddenFor(m => m.Title)
+        <input id="subButton" onsubmit="valid" type="submit" name="submit-button" class="btn btn-primary btn-lg" value="Создать PDF c кодами">
+}
+
+}
+        </div>
+
+    </center>
+</div>
+<script type="text/javascript">
+
+    function validate_form() {
+        var tests = Array.filter(document.getElementsByClassName('checkPDF'), function (elem) {
+            var id = "#" + elem.id;
+            if ($(id).attr("checked") == 'checked') {
+                return true;
+            }
+        }
+
+            alert("Выберите коды");
+            return false;
+        
+    }
+
+    $('#subButton').on('click', function(){
+        if($("#agree").attr("checked") == 'checked') {
+            $('#target').submit(function(){});
+        } else {
+            window.alert('Дайте свое согласие на обработку данных!');
+            $("#agree").css('border', '1px solid red');
+        }
+    });
+
+</script>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")

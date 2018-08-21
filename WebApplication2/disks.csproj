@@ -64,6 +64,9 @@
     <Reference Include="ImageResizer.Plugins.PrettyGifs, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ImageResizer.Plugins.PrettyGifs.4.2.0\lib\net45\ImageResizer.Plugins.PrettyGifs.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>C:\Users\kras\Desktop\itextsharp-develop\src\core\bin\Debug_woDrawing\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="MailKit, Version=2.0.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
       <HintPath>..\packages\MailKit.2.0.1\lib\net45\MailKit.dll</HintPath>
     </Reference>
@@ -247,6 +250,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\PDF.cs" />
     <Compile Include="Models\VipCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -278,6 +282,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\main.png" />
     <Content Include="images\tild3036-3131-4934-b633-356631303739__-__resize__20x__0_932dd_1262885f_ori.jpg" />
     <Content Include="images\tild3036-3131-4934-b633-356631303739__0_932dd_1262885f_ori.jpg" />
     <Content Include="images\tild3437-6463-4033-a436-383437663565__-__resize__20x__fonstolaru-117280.jpg" />
@@ -308,6 +313,7 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="PDF\arial.ttf" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -347,7 +353,7 @@
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Login2.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
@@ -389,6 +395,18 @@
       <BrowseToURL>~/Home/ListAutoServicesForCity</BrowseToURL>
     </Content>
     <Content Include="Views\Home\CreateDisksV.cshtml" />
+    <Content Include="Views\Home\AdminPanelCreatePinCode.cshtml" />
+    <Content Include="Views\Home\CheckCreateDisksPin.cshtml" />
+    <Content Include="Views\Home\CreateDisksPin.cshtml" />
+    <Content Include="Views\Home\SellDisks.cshtml" />
+    <Content Include="Views\Home\PartialListCodeAndPin.cshtml" />
+    <Content Include="Views\Home\CheckPinAndCode.cshtml" />
+    <Content Include="Views\Home\SuccessCreateDisksPin.cshtml" />
+    <Content Include="Views\Home\SuccessSellDisksPin.cshtml" />
+    <Content Include="Views\Home\SellKod.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\PartLogin.cshtml" />
+    <Content Include="Views\Account\PartRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

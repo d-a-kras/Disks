@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@using WebApplication2.App_Start
 @{
     Layout = null;
 }
@@ -8,17 +9,39 @@
     {
         @Html.AntiForgeryToken()
         <div id="nav46750502marker"></div>
-        <div id="nav46750502" class="t456 t456__positionfixed " style="background-color: rgba(0,0,0,1); " data-bgcolor-hex="#000000" data-bgcolor-rgba="rgba(0,0,0,1)" data-navmarker="nav46750502marker" data-appearoffset="" data-bgopacity-two="" data-menushadow="" data-bgopacity="1" data-menu-items-align="right" data-menu="yes">
+        <div id="nav46750502" class="t456 t456__positionfixed " style="background-color: rgba(0,0,0,1); height:100px; " data-bgcolor-hex="#000000" data-bgcolor-rgba="rgba(0,0,0,1)" data-navmarker="nav46750502marker" data-appearoffset="" data-bgopacity-two="" data-menushadow="" data-bgopacity="1" data-menu-items-align="right" data-menu="yes">
             <div class="t456__maincontainer " style="">
                 <div class="t456__leftwrapper" style="">
                     <div>
                         <a href="/" style="color:#ffffff;">
-                            <div class="t456__logo t-title" field="title" style="color:#ffffff;"><div style="color:#f5ed05;" data-customstyle="yes"><strong>SkrinDisk</strong></div></div>
+                            <div class="t456__logo t-title" field="title" style="color:#ffffff;">
+
+                                <!--<div style="color:#f5ed05;" data-customstyle="yes"><strong>SkrinDisk</strong></div>-->
+
+                                <img src='../../images/main.png' style=" margin:5px; width:auto; height:85px;">
+
+                            </div>
                         </a>
+
                     </div>
                 </div>
+                @if (@User.Identity.GetUserName() == Const.AdminLogin)
+    {
+            <ul class="menu">
+                <li>
+                    <a href=#>Админ-страницы</a>
+                    <ul class="submenu">
+                        <li><a href="\Home\AdminPanelServices">Автосервисы</a></li>
+                        <li><a href="\Home\AdminPanelCreatePinCode">Создание пин-кодов</a></li>
+                        <li><a href="\Home\PanelDoc">Список кодов</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+}
                 <div class="t456__rightwrapper t456__menualign_right" style="">
                     <ul class="t456__list">
+
                         <li class="t456__list_item"><a class="t-menu__link-item" href="\Home\AutoServices2" style="color:#ffffff;font-weight:600;" data-menu-item-number="1">Авторизованные сервисы</a></li>
                         <li class="t456__list_item"><a class="t-menu__link-item" href="\Home\ListDisks" style="color:#ffffff;font-weight:600;" data-menu-item-number="2">Мои диски</a></li>
 
@@ -36,12 +59,17 @@
 else
 {
     <div id="nav46750502marker"></div>
-    <div id="nav46750502" class="t456 t456__positionfixed " style="background-color: rgba(0,0,0,1); " data-bgcolor-hex="#000000" data-bgcolor-rgba="rgba(0,0,0,1)" data-navmarker="nav46750502marker" data-appearoffset="" data-bgopacity-two="" data-menushadow="" data-bgopacity="1" data-menu-items-align="right" data-menu="yes">
+    <div id="nav46750502" class="t456 t456__positionfixed " style="background-color: rgba(0,0,0,1);height:100px; " data-bgcolor-hex="#000000" data-bgcolor-rgba="rgba(0,0,0,1)" data-navmarker="nav46750502marker" data-appearoffset="" data-bgopacity-two="" data-menushadow="" data-bgopacity="1" data-menu-items-align="right" data-menu="yes">
         <div class="t456__maincontainer " style="">
-            <div class="t456__leftwrapper" style="">
-                <div>
+            <div class="t456__leftwrapper" style=" ">
+                <div style=" width:90%;">
                     <a href="/" style="color:#ffffff;">
-                        <div class="t456__logo t-title" field="title" style="color:#ffffff;"><div style="color:#f5ed05;" data-customstyle="yes"><strong>SkrinDisk</strong></div></div>
+                        <div class="t456__logo t-title" field="title" style="color:#ffffff;  ">
+
+                            <!--<div style="color:#f5ed05;" data-customstyle="yes"><strong>SkrinDisk</strong></div>-->
+                            <img src='../../images/main.png' style="margin: 5px; width:auto; height:85px;">
+
+                        </div>
                     </a>
                 </div>
             </div>
@@ -60,3 +88,66 @@ else
 
 
 }
+
+<style>
+    ul {
+        display: block;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+        ul:after {
+            display: block;
+            content: ' ';
+            clear: both;
+            float: none;
+        }
+
+        ul.menu > li {
+            float: left;
+            position: relative;
+        }
+
+            ul.menu > li > a {
+                display: block;
+                padding: 10px;
+                color: white;
+                background-color: silver;
+                text-decoration: none;
+            }
+
+                ul.menu > li > a:hover {
+                    background-color: black;
+                }
+
+        ul.submenu {
+            display: none;
+            position: absolute;
+            width: 120px;
+            top: 37px;
+            left: 0;
+            background-color: white;
+            border: 1px solid red;
+        }
+
+            ul.submenu > li {
+                display: block;
+            }
+
+                ul.submenu > li > a {
+                    display: block;
+                    padding: 10px;
+                    color: black;
+                    background-color: silver;
+                    text-decoration: none;
+                }
+
+                    ul.submenu > li > a:hover {
+                        text-decoration: underline;
+                    }
+
+        ul.menu > li:hover > ul.submenu {
+            display: block;
+        }
+</style>

@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
+using WebApplication2.App_Start;
 
 namespace WebApplication2.Models
 {
@@ -24,6 +25,9 @@ namespace WebApplication2.Models
         public bool? Optom { get; set; }
         public String OldOwner { get; set; }
         public bool? EditNow { get; set; }
+        public int? pincode{get; set;}
+        public int? checkpin{get; set;}
+        public bool printPDF { get; set; }
 
 
         public Disks(string iu) {
@@ -33,7 +37,9 @@ namespace WebApplication2.Models
             SendMVD = false;
             Paid = false;
             Folder = "temp";
-
+            checkpin=0;
+            pincode=Kod.getPinCode();
+            printPDF = false;
         }
         public Disks()
         {
@@ -43,10 +49,23 @@ namespace WebApplication2.Models
             SendMVD = false;
             Paid = false;
             Folder = "temp";
-
+            checkpin=0;
+            //pincode=Code.getPinCode();
+            printPDF = false;
         }
 
-
+        public Disks(bool pin)
+        {
+            this.IdUser = "Admin";
+            Code = Kod.GetKode();
+            LOT = false;
+            SendMVD = false;
+            Paid = false;
+            Folder = "temp";
+            checkpin = 0;
+            pincode = Kod.getPinCode();
+            printPDF = false;
+        }
 
     }
 

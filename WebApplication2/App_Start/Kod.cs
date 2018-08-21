@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -37,6 +37,15 @@ namespace WebApplication2.App_Start
                 logger.Trace(ex.StackTrace);
                 return "";
             }
+        }
+        
+        public static int getPinCode() { 
+            
+            Random rnd = new Random();
+            int pin=rnd.Next(0, 9999);;
+            
+           return pin;
+
         }
 
         public static void reCount() {
@@ -128,16 +137,16 @@ namespace WebApplication2.App_Start
             dictionary.Add(47, 'Ь');
             dictionary.Add(48, 'Б');
             dictionary.Add(49, 'Ю');
-            dictionary.Add(50, '^');
-            dictionary.Add(51, '=');
-            dictionary.Add(52, '+');
-            dictionary.Add(53, '-');
-            dictionary.Add(54, '%');
-            dictionary.Add(55, '#');
-            dictionary.Add(56, '!');
-            dictionary.Add(57, '*');
-            dictionary.Add(58, '<');
-            dictionary.Add(59, '>');
+            dictionary.Add(50, 'q');
+            dictionary.Add(51, 'w');
+            dictionary.Add(52, 'r');
+            dictionary.Add(53, 'y');
+            dictionary.Add(54, 'u');
+            dictionary.Add(55, 'f');
+            dictionary.Add(56, 'g');
+            dictionary.Add(57, 'h');
+            dictionary.Add(58, 'j');
+            dictionary.Add(59, 'v');
            
         }
     }

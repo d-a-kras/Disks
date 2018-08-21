@@ -1,0 +1,96 @@
+﻿@using WebApplication2.Models
+@model LoginViewModel
+<center>
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div id="rec47326090" class="r t-rec t-rec_pt_30 t-rec_pb_120" style="padding-top:30px;padding-bottom:120px; " data-animationappear="off" data-record-type="690">
+            <!-- t690 --><div class="t690">
+                <div class="t-container">
+                    <div class="">
+
+                        <!-- NO ONE SERVICES CONNECTED -->
+                        <div class="js-successbox t-form__successbox t-text t-text_md" style="display:none;"></div>
+                        <div class="t-form__inputsbox">
+                            <div class="t-input-group t-input-group_em" data-input-lid="1494863045129">
+                                <div class="t-input-block">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "t-input js-tilda-rule", @placeholder = "E-mail", @style = "min-width:100%;color:#000000; border:1px solid #000000;" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+
+                                </div>
+                            </div>
+                            <div class="t-input-group t-input-group_nm" data-input-lid="1495122982159">
+                                <div class="t-input-block">
+
+                                    @Html.PasswordFor(m => m.Password, new { @class = "t-input js-tilda-rule", @placeholder = "Пароль", @style = "min-width:100%;color:#000000; border:1px solid #000000; " })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="t-form__errorbox-middle">
+                                <div class="js-errorbox-all t-form__errorbox-wrapper" style="display:none;"> <div class="t-form__errorbox-text t-text t-text_md"> <p class="t-form__errorbox-item js-rule-error js-rule-error-all"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-req"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-email"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-name"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-phone"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-string"></p> </div> </div>
+                            </div> <div class="t-form__submit">
+
+                                <button type="submit" class="t-submit" style="color:#ffffff;background-color:#000000;">Войти</button>
+                            </div>
+                        </div> <div class="t-form__errorbox-bottom"> <div class="js-errorbox-all t-form__errorbox-wrapper" style="display:none;"> <div class="t-form__errorbox-text t-text t-text_md"> <p class="t-form__errorbox-item js-rule-error js-rule-error-all"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-req"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-email"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-name"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-phone"></p> <p class="t-form__errorbox-item js-rule-error js-rule-error-string"></p> </div> </div> </div>
+                        <center>
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+
+                        </center>
+
+                        <center>
+                            <p>
+                                @Html.ActionLink("Забыли пароль?", "ForgotPassword")
+                            </p>
+                        </center>
+                        <style>
+                            #rec47326090 input::-webkit-input-placeholder {
+                                color: #000000;
+                                opacity: 0.5;
+                            }
+
+                            #rec47326090 input::-moz-placeholder {
+                                color: #000000;
+                                opacity: 0.5;
+                            }
+
+                            #rec47326090 input:-moz-placeholder {
+                                color: #000000;
+                                opacity: 0.5;
+                            }
+
+                            #rec47326090 input:-ms-input-placeholder {
+                                color: #000000;
+                                opacity: 0.5;
+                            }
+
+                            #rec47326090 textarea::-webkit-input-placeholder {
+                                color: #000000;
+                                opacity: 0.5;
+                            }
+
+                            #rec47326090 textarea::-moz-placeholder {
+                                color: #000000;
+                                opacity: 0.5;
+                            }
+
+                            #rec47326090 textarea:-moz-placeholder {
+                                color: #000000;
+                                opacity: 0.5;
+                            }
+
+                            #rec47326090 textarea:-ms-input-placeholder {
+                                color: #000000;
+                                opacity: 0.5;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+</center>

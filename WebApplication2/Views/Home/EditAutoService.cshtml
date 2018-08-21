@@ -56,13 +56,16 @@
 
     </p>
     <p>
+       
         @Html.LabelFor(m => m.Picture, "Логотип")
         <br />
+
         @if (Model.Picture != null)
-        {
-            @Html.Raw("<img style='width:80px; height:80px;' src=\"data:image/jpeg;base64,"
-                                                    + Convert.ToBase64String(Model.Picture) + "\" />")
-            <br />}
+    {
+        @Html.Raw("<img style='width:80px; height:80px;' src=\"data:image/jpeg;base64,"
+                                                 + Convert.ToBase64String(Model.Picture) + "\" />")
+            @Html.HiddenFor(m=>m.Picture,Model.Picture)
+        <br />}
         <input type="file" name="Image" accept="image/jpeg,image/png">
     </p>
 

@@ -1,0 +1,13 @@
+2018-08-17 00:22:38.5827 | WebApplication2.Controllers.HomeController+<CheckPinAndCode>d__20.MoveNext | TRACE | check=5 3QXQQQKQOL d.a.kras@mail.ru 
+
+2018-08-17 00:22:39.3514 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-08-17 00:24:42.4790 | WebApplication2.Controllers.HomeController+<CheckPinAndCode>d__20.MoveNext | TRACE | check=5 3QXQQQKQOL d.a.kras@mail.ru 
+
+2018-08-17 00:24:42.5331 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-08-17 00:25:22.8080 | WebApplication2.Controllers.HomeController.UpdateDisksWithPinSave | TRACE | Ошибка перемещения файла(ов): Невозможно создать файл, так как он уже существует.
+ 
+
+2018-08-17 00:40:23.6935 | WebApplication2.Controllers.HomeController.CreateDisks | DEBUG | CreateDisks 
+

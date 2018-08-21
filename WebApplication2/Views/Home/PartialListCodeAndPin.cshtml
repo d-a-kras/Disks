@@ -1,0 +1,38 @@
+﻿@if (@Model != null)
+{
+
+
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Выбрать</th>
+                <th>Код для дисков</th>
+                <th>Пин-код</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+
+                    <td></td>
+                    <td>@item.Code</td>
+                    <td>@item.pincode</td>
+
+
+                </tr>
+
+            }
+
+
+
+
+        </tbody>
+    </table>
+
+}
+        

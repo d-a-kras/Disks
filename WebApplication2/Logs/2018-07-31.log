@@ -1,0 +1,47 @@
+2018-07-31 00:29:27.3195 | WebApplication2.Controllers.HomeController+<CheckPinAndCode>d__8.MoveNext | TRACE | check=5 3QЮQQQ1QIL d.a.kras@mail.ru 
+
+2018-07-31 21:43:14.9077 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:03:21.3616 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:03:24.7873 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:04:14.6132 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:05:27.3483 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:05:37.6619 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:06:11.2023 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:09:13.3521 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:09:46.4528 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:10:50.8990 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:12:12.7716 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:12:49.5872 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:12:53.5640 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:13:35.0655 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:13:57.4651 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:15:07.0759 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:16:28.9793 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:37:57.4318 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
+2018-07-31 22:38:32.5327 | WebApplication2.Controllers.HomeController.UpdateDisksWithPinSave | TRACE | Save disks0 
+
+2018-07-31 22:38:32.5567 | WebApplication2.Controllers.HomeController.UpdateDisksWithPinSave | TRACE |    в System.Data.Entity.Internal.InternalContext.SaveChanges()
+   в System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   в System.Data.Entity.DbContext.SaveChanges()
+   в WebApplication2.Controllers.HomeController.UpdateDisksWithPinSave(Disks disks) в D:\drive\разработки\Disks\WebApplication2\Controllers\HomeController.cs:строка 146 
+
+2018-07-31 23:45:25.2128 | WebApplication2.Controllers.HomeController.CreateDisksPin | DEBUG | CreateDisksPin 
+
